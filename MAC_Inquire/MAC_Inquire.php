@@ -4,23 +4,17 @@
 	<meta charset="UTF-8">
 	<!-- <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge"> -->
-	<title>Document</title>
+	<title>MAC_Inquire</title>
 	<style>
 		.error {color: #FF0000;}
 		<!--设置出错时的样式。-->
 	</style>
 </head>
 <body>
-
-<?php
-
-header('content-type:text/html;charset=utf-8');
-
-require_once '../_func&ext/functions.php';
-
-$PHP_self=htmlspecialchars($_SERVER["PHP_SELF"]);
-$macinputErr= "";
-echo <<<EOF1
+    <h1 style="text-align: center">arsenal4NA</h1>
+	<h3 style="text-align: center">&emsp;&emsp;“网管军火库/工具箱”（arsenal for Network Administrator），一些网络工作中经常会用到的工具。</h3>
+    <br />
+	<hr style="height:1px;border:none;align: center;border-top:5px dashed LawnGreen;" width="60%"/>
 <h2>MAC地址归属厂商查询</h2>
 <h4>资料更新时间：2020-01-29</h4>
 <font>请在下面的框中输入要查询的MAC地址，支持的输入格式有：<br />
@@ -35,85 +29,21 @@ echo <<<EOF1
 8、001A11<br />
 </font><br />
 
-<form method="post" action="{$PHP_self}">
-	<b>MAC地址输入：</b><input type="text" name="macinput">
-	<span class="error">*</span><span>必填项</span>
-	<br /><br />
+<form method="post" action="doAction.php">
+	<table>
+		<tr>
+			<td><b>MAC地址输入：</b></td>
+			<td><input type="text" name="macinput" id="" placeholder="请输入有效的MAC地址……"></td>
+			<td><span class="error">*</span><span>必填项</span></td>
+		<tr>
+		<tr>
+			<td><b>请输入验证码：</b></td>
+			<td><input type="text" name="verify_r" id="" placeholder="请输入右侧的验证码……"></td>
+			<td><img src="getverify.php" alt="" id='verifyimage'/><a onclick="document.getElementById('verifyimage').src='getverify.php?r='+Math.random()" href="javascript:void(0)">看不清，换一个</a></td>
+		<tr>
+	</table>
 	<input type="submit" name="submit" value="提交">
 </form>
-EOF1;
-
-$macinput= "";	//定义变量并设置为空值
-$result= 1;
-$display= "";
-
-//$line='';
-
-
-
-if ($_SERVER["REQUEST_METHOD"] == "POST"){	//若不进行本判断，则第一次打开页面也会报“MAC地址不能为空”的错误
-
-	$showinput = $_POST["macinput"];
-	//$macinput = strtr($showinput, "：", ":");			//将全角“：”转换为半角“:”，未达到预期
-	//$macinput = str_replace('：', ':', $showinput);	//将全角“：”转换为半角“:”
-	$macinput = convertStrType($showinput, 'TOSBC');	//将全角“：”转换为半角“:”
-
-	if (empty($_POST["macinput"])) {	//验证是否为空
-		$macinputErr = "错误：MAC地址不能为空";
-	}else{
-		if (preg_match('/[^a-f0-9\-\:\s]/i', $macinput)){	//验证输入字符串是否包含不应该在MAC地址中出现的字符
-			$macinputErr = "错误：输入的MAC地址只能包含：“0至9”、“A至F”、“空格”、“-”、“:”（注意冒号为半角）";
-		}else{
-			$macinput = text_input($macinput);	//调用函数，处理字符串
-			$macinput = preg_replace('/[\:]/', '', $macinput);
-			$macinput = preg_replace('/[\-]/', '', $macinput);
-
-			if ((strlen($macinput) < 6) or (strlen($macinput) > 12)){
-				$macinputErr = "错误：输入的MAC地址，长度不符合要求（应至少包含前3个字节，不能长于一个MAC地址）";
-			}
-			else {
-				$mac_head = substr ( $macinput , 0 , 6 );
-				$mac_head = substr_replace(substr_replace($mac_head,'-', 2,0),'-', 5,0);
-
-				$handler=fopen("oui.txt","r");
-
-				do{
-						$line = fgets($handler);
-					//  echo $line;
-						if (substr_count($line,$mac_head)>0) {				// 进行比较
-						 $result = $line;
-						}
-				//当目标文件正在被notepad打开时，会造成死循环
-				}while((!feof($handler) and $result==1)); //$result结果改变，或，达到文件末尾，则跳出循环
-				//}while(!feof($handler));  //不管有没有匹配到，都循环到最后一行
-				fclose($handler); //关闭文件
-
-				if($result==1){//判断$result是否为空
-					$display = '<font style="background-color:Gainsboro;color:OrangeRed;font-size: 24px;"><b>未匹配到相关记录</b></font>';
-				}else {
-					$display = '<font style="background-color:SpringGreen;color:Navy;font-size: 24px;">'.$result.'</font>';
-				}
-
-			}
-		}
-	}
-
-
-
-//echo $macinput;	//debug
-echo <<<EOF2
-<span class="error">{$macinputErr}</span><br />
-<font>你输入的MAC地址是：</font><font style="background-color:Lavender">{$showinput}</font><br />
-<font>经查询，该MAC地址被分配给如下厂商：</font><br />
-{$display}<br />
-EOF2;
-
-}
-
-?>
-<br />
-<a href="http://standards-oui.ieee.org/oui/oui.txt"><span style="background-color:Khaki">参考：IEEE公布的MAC地址归属厂商列表</span></a><br />
-
 
 
 </body>
