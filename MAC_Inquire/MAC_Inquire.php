@@ -28,7 +28,7 @@ echo <<<EOF1
 2、使用“:”进行分隔的格式：00:1A:11:A1:B2:C3<br />
 3、使用“空格”进行分隔的格式：00&nbsp;1A&nbsp;11&nbsp;A1&nbsp;B2&nbsp;C3<br />
 4、不使用任何符号进行分隔的格式：001A11A1B2C3<br />
-也可以只输入前三个字节（输入长于等于3个字节，或完整MAC地址，均能正常识别）：<br />
+也可以只输入前三个字节（输入长度大于等于3个字节，至完整长度的MAC地址，均能自动识别）：<br />
 5、00-1A-11<br />
 6、00:1A:11<br />
 7、00&nbsp;1A&nbsp;11<br />
@@ -44,7 +44,12 @@ echo <<<EOF1
 EOF1;
 
 $macinput= "";	//定义变量并设置为空值
-$result= "";
+$result= 1;
+$display= "";
+
+//$line='';
+
+
 
 if ($_SERVER["REQUEST_METHOD"] == "POST"){	//若不进行本判断，则第一次打开页面也会报“MAC地址不能为空”的错误
 
@@ -69,40 +74,38 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){	//若不进行本判断，则第一�
 			else {
 				$mac_head = substr ( $macinput , 0 , 6 );
 				$mac_head = substr_replace(substr_replace($mac_head,'-', 2,0),'-', 5,0);
-	
+
 				$handler=fopen("oui.txt","r");
-				while(!feof($handler)){
-					$line = fgets($handler,204800); //fgets逐行读取，204800最大长度，默认为1024
-					if(substr_count($line,$mac_head)>0){//查找字符串
-						$result = $line; //打印结果
-					}
-				}
+
+				do{
+						$line = fgets($handler);
+					//  echo $line;
+						if (substr_count($line,$mac_head)>0) {				// 进行比较
+						 $result = $line;
+						}
+				//当目标文件正在被notepad打开时，会造成死循环
+				}while((!feof($handler) and $result==1)); //$result结果改变，或，达到文件末尾，则跳出循环
+				//}while(!feof($handler));  //不管有没有匹配到，都循环到最后一行
 				fclose($handler); //关闭文件
+
+				if($result==1){//判断$result是否为空
+					$display = '<font style="background-color:Gainsboro;color:OrangeRed;font-size: 24px;"><b>未匹配到相关记录</b></font>';
+				}else {
+					$display = '<font style="background-color:SpringGreen;color:Navy;font-size: 24px;">'.$result.'</font>';
+				}
+
 			}
 		}
 	}
 
-/*	fault			
-			//首先采用“fopen”函数打开文件，得到返回值的就是资源类型。
-			$file_handle = fopen("/WZ/Demo/p1_MAC/oui.txt","r");
-			if ($file_handle){
-				//接着采用while循环（后面语言结构语句中的循环结构会详细介绍）一行行地读取文件，然后输出每行的文字
-				while (!feof($file_handle)) { //判断是否到最后一行
-					$line = fgets($file_handle); //读取一行文本
-					if (preg_match($macinput, $line)){
-						$result = $line; 	//将该行赋值给result变量
-					}
-				}
-			}
-			fclose($file_handle);//关闭文件		
-*/		
+
 
 //echo $macinput;	//debug
 echo <<<EOF2
 <span class="error">{$macinputErr}</span><br />
 <font>你输入的MAC地址是：</font><font style="background-color:Lavender">{$showinput}</font><br />
 <font>经查询，该MAC地址被分配给如下厂商：</font><br />
-<font style="background-color:SpringGreen;color:Navy;font-size: 24px;">{$result}</font><br />
+{$display}<br />
 EOF2;
 
 }

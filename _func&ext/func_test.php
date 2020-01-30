@@ -33,8 +33,25 @@ echo '<br />';
 
 
 
+/*
+$line='';
+$result=1;
+$mac_head='001A11';
+$handler=fopen("../MAC_Inquire/oui_test.txt","r");
 
-
+do{
+    $line = fgets($handler);
+  //  echo $line;
+    if (substr_count($line,$mac_head)>0) {				// 进行比较
+     $result = $line;
+    }
+//当目标文件正在被notepad打开时，会造成死循环
+}while((!feof($handler) and $result==1)); //$result结果改变，或，达到文件末尾，则跳出循环
+//}while(!feof($handler));  //不管有没有匹配到，都循环到最后一行
+echo $line.'<br/>';
+echo $result.'<br/>';
+fclose($handler); //关闭文件
+*/
 
 
 
