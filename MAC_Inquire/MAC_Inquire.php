@@ -5,10 +5,6 @@
 	<!-- <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge"> -->
 	<title>MAC_Inquire</title>
-	<style>
-		.error {color: #FF0000;}
-		<!--设置出错时的样式。-->
-	</style>
 </head>
 <body>
     <h1 style="text-align: center">arsenal4NA</h1>
