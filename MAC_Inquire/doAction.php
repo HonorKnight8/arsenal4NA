@@ -7,10 +7,14 @@
 	<title>MAC_Inquire</title>
 	<style>
 		.error {color: #FF0000;}
-		<!--设置出错时的样式。-->
+		/* <!--设置出错时的样式。--> */
+        /* <style>标签的注释，跟html注释有别 */
+        .div {width:640px;margin:0 auto;}
 	</style>
 </head>
 <body>
+
+
 
 <?php
 header('content-type:text/html;charset=utf-8');
@@ -24,8 +28,9 @@ $rereg='<a href="MAC_Inquire.php">后退</a>';
 $verify_a = strtolower($_SESSION['verify_a']);
 $verify_r = strtolower($_POST['verify_r']);
 
-$result= 1;
-$macinputErr= "";
+$result = 1;
+$display ="";
+$macinputErr = "";
 
 $showinput = $_POST["macinput"];
 //$macinput = strtr($showinput, "：", ":");			//将全角“：”转换为半角“:”，未达到预期
@@ -77,16 +82,14 @@ if ($verify_r!=$verify_a){
     
 }
 echo <<<EOF1
+<div class="div">
 <span class="error">{$macinputErr}</span>{$rereg}<br />
 <font>你输入的MAC地址是：</font><font style="background-color:Lavender">{$showinput}</font><br />
 <font>经查询，该MAC地址被分配给如下厂商：</font><br />
 {$display}<br /><br />
 <a href="http://standards-oui.ieee.org/oui/oui.txt"><span style="background-color:Khaki">参考：IEEE公布的MAC地址归属厂商列表</span></a><br />
+</div>
 EOF1;
-
-
-
-
 
 
 
@@ -97,21 +100,7 @@ EOF1;
 
 
 
-
-
-
-
-
-
-
-
-
-
-
 ?>
-
-
-
 
 
 

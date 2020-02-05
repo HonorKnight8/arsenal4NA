@@ -5,13 +5,18 @@
 	<!-- <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge"> -->
 	<title>MAC_Inquire</title>
+
+	<style>
+		.div {width:640px;margin:0 auto;}
+	</style>
 </head>
 <body>
-    <h1 style="text-align: center">arsenal4NA</h1>
-	<h3 style="text-align: center">&emsp;&emsp;“网管军火库/工具箱”（arsenal for Network Administrator），一些网络工作中经常会用到的工具。</h3>
-    <br />
-	<hr style="height:1px;border:none;align: center;border-top:5px dashed LawnGreen;" width="60%"/>
-<h2>MAC地址归属厂商查询</h2>
+<div class="div">
+<h1 style="text-align: center">arsenal4NA</h1>
+<h3 style="text-align: left">&emsp;&emsp;“网管军火库/工具箱”（arsenal for Network Administrator），一些网络工作中经常会用到的工具。</h3>
+<br />
+<hr style="height:1px;border:none;align:center;border-top:5px dashed LawnGreen;" width="75%"/>
+<h2 style="text-align: center">MAC地址归属厂商查询</h2>
 <h4>资料更新时间：2020-01-29</h4>
 <font>请在下面的框中输入要查询的MAC地址，支持的输入格式有：<br />
 1、使用“-”进行分隔的格式：00-1A-11-A1-B2-C3<br />
@@ -26,6 +31,7 @@
 </font><br />
 
 <form method="post" action="doAction.php">
+
 	<table>
 		<tr>
 			<td><b>MAC地址输入：</b></td>
@@ -39,8 +45,9 @@
 		<tr>
 	</table>
 	<input type="submit" name="submit" value="提交">
-</form>
 
+</form>
+</div>
 
 </body>
 </html>
