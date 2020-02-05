@@ -1,5 +1,13 @@
 <?php
 
+require_once 'verify.func.php';
+
+$fontfile='../fonts/Roboto-Black.ttf';
+
+getVerify($fontfile,$length=6,$type=1,$pixel=100,$whiteline=7,$line=2,$arc=1,$width=200,$height=50,$codeName='verifycode');
+
+
+/*
 require_once 'functions.php';
 
 $MACs=array(
@@ -25,7 +33,7 @@ echo convertStrType($str, 'TOSBC');
 echo '<br />';
 echo convertStrType($str, 'TODBC');
 echo '<br />';
-
+*/
 
 
 
