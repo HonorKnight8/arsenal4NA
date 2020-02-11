@@ -65,7 +65,7 @@ class Main
     }
     private function Scripts()
     {
-        return "Scripts";
+        return new Scripts();
     }
     private function MAC_Inquire()
     {
@@ -93,12 +93,4 @@ class Main
     {
         return "ITAM";
     }
-
-    // private function getCircle()
-    // {
-    //     $input = '<b>请输入 ｜ 圆形 ｜ 的半径：</b><p>';
-    //     $input .= '半径: <input type="text" name="radius" value="' . $_POST['radius'] . '" ><br>';
-    //     $input .= '<input type="hidden" name="action" value="circle">';
-    //     return $input;
-    // }
 }
