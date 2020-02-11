@@ -46,7 +46,7 @@
         include "_libs/" . strtolower($className) . ".class.php";
     });
 
-    echo new Body();
+    echo new Main();
     ?>
 </body>
 

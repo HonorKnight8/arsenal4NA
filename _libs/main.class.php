@@ -1,5 +1,5 @@
 <?php
-class Body
+class Main
 {
     private $action;
     private $menu;
@@ -20,9 +20,9 @@ class Body
         //$form = '<form action="' . $this->action . '" method="post" >';
 
         $div = '<div id="main">';
-        $div .= '<span style="font-size:30px;cursor:pointer" title="打开菜单" onclick="openNav()">&#9776; arsenal4NA</span><br />';
+        $div .= '<tr><td><span style="font-size:30px;cursor:pointer" class="menubtn" title="打开菜单" onclick="openNav()">&#9776; </span></td><td ><span style="font-size:30px">arsenal4NA</span></td></tr>';
 
-        $div .= '<a href="_libs/func_test.php">函数测试</a><br />';
+        $div .= '<br /><center><a href="_libs/func_test.php">函数测试</a></center><br />';
 
 
         switch ($this->menu) {
