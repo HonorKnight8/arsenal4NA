@@ -22,7 +22,7 @@ class Main
         $div = '<div id="main">';
         $div .= '<tr><td><span style="font-size:30px;cursor:pointer" class="menubtn" title="打开菜单" onclick="openNav()">&#9776; </span></td><td ><span style="font-size:30px">arsenal4NA</span></td></tr>';
 
-        $div .= '<br /><center><a href="_libs/func_test.php">函数测试</a></center><br />';
+        // $div .= '<br /><center><a href="_libs/func_test.php">函数测试</a></center><br />';
 
 
         switch ($this->menu) {
@@ -30,7 +30,8 @@ class Main
                 $div .= $this->HomePage();
                 break;
             case "Scripts":
-                $div .= $this->Scripts();
+                // $div .= $this->Scripts();
+                $div .= new Scripts();
                 break;
             case "MAC_Inquire":
                 $div .= $this->MAC_Inquire();
@@ -42,7 +43,8 @@ class Main
                 $div .= $this->WinFW_analyze();
                 break;
             case "Contacts":
-                $div .= $this->Contacts();
+                // $div .= $this->Contacts();
+                $div .= new Contacts();
                 break;
             case "Exam":
                 $div .= $this->Exam();
@@ -60,37 +62,49 @@ class Main
 
     private function HomePage()
     {
-        $body = '<div class="div1"><h4>&emsp;&emsp;arsenal4NA(arsenal for Network Administrator)，即：“网管军火库/工具箱”，本攻城狮自己写的一些网络管理、HelpDesk、基础IT运维工作中可能会用到的工具。</h4><br /><hr style="height:1px;border:none;border-top:5px dashed LawnGreen;" width="75%" /></div>';
-        return $body;
+        $div = '<div class="div1">';
+        $div .= '<h4>&emsp;&emsp;arsenal4NA(arsenal for Network Administrator)，即：“网管军火库/工具箱”，本攻城狮自己写的一些网络管理、HelpDesk、基础IT运维工作中可能会用到的工具。</h4><br />';
+        $div .= '<hr style="height:1px;border:none;border-top:5px dashed LawnGreen;" width="75%" />';
+        $div .= '<span><b>目前进度：</b></span><br /><br />';
+        $div .= '<span>“常用脚本”：功能基本完成</span><br /><br />';
+        $div .= '<span>“MAC查询”：功能基本完成</span><br />';
+        $div .= '<span>&emsp;&emsp;1、基于过程开发，待改造</span><br />';
+        $div .= '<span>&emsp;&emsp;2、添加批量查询功能</span><br /><br />';
+        $div .= '<span>“通讯录”：正在开发</span><br /><br />';
+        $div .= '<span>其他：未动工</span><br /><br />';
+
+        $div .= '</div>';
+        return $div;
     }
-    private function Scripts()
+    /*     private function Scripts()
     {
-        return new Scripts();
-    }
+        // return new Scripts();
+        return "<p>Scripts";
+    } */
     private function MAC_Inquire()
     {
-        return "MAC_Inquire";
+        return "<p>MAC_Inquire";
     }
     private function Subnet_Calc()
     {
-        return "Subnet_Calc";
+        return "<p>Subnet_Calc";
     }
     private function WinFW_analyze()
     {
-        return "WinFW_analyze";
+        return "<p>WinFW_analyze";
     }
 
-    private function Contacts()
+    /*     private function Contacts()
     {
         //判断登录状态
         return "Contacts";
-    }
+    } */
     private function Exam()
     {
-        return "Exam";
+        return "<p>Exam";
     }
     private function ITAM()
     {
-        return "ITAM";
+        return "<p>ITAM";
     }
 }

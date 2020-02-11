@@ -2,7 +2,7 @@
 
 require_once 'verify.func.php';
 
-$fontfile='../fonts/Roboto-Black.ttf';
+$fontfile='../_fonts/SourceHanSerifCN-Medium.otf';
 
 getVerify($fontfile,$length=6,$type=1,$pixel=100,$whiteline=7,$line=2,$arc=1,$width=200,$height=50,$codeName='verifycode');
 
@@ -60,7 +60,3 @@ echo $line.'<br/>';
 echo $result.'<br/>';
 fclose($handler); //关闭文件
 */
-
-
-
-?>
