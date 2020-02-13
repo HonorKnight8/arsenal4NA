@@ -38,14 +38,10 @@ body {
     color: #f1f1f1;
 }
 
-/*菜单列表图标*/
-.menubtn:hover{
+/*除边栏外,其他链接的鼠标悬浮样式*/
+.link:hover{
     color:rgb(115, 255, 0);
-}
-
-/*登录图标*/
-.loginbtn:hover{
-    color:rgb(115, 255, 0);
+    text-decoration:none;
 }
 
 /*侧栏和关闭按钮的位置选择器*/
@@ -60,7 +56,7 @@ body {
 }
  
 /*主体内容*/
-#main #topbar{
+#main #topbar {
     transition: margin-left .5s;/*主体内容延迟0.5s整体y右移动*/
     padding: 16px;
 }

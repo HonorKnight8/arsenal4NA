@@ -30,16 +30,30 @@ class Session
 		session_start();
 	}
 
+	//在运行session_start(); //启动
 	public static function open($path, $name)
 	{
+
+
+
+
+
+		// 一开始会话就应该写数据库
+		// id      l48p3d6ev2859dpmi4u4a5m2d0
+		// time    1581589859
+		// ip      ::1 
+		// data    permission|s:1:"0";staffID|s:5:"10001";loginStatus|i:1;staffName|s:6:"刘一";
+
 		return true;
 	}
 
+	//session_write_close()  session_destroy() 
 	public static function close()
 	{
 		return true;
 	}
 
+	//session_start(), $_SESSION， 读取session数据到$_SESSION中
 	public static function read($PHPSESSID)
 	{
 		$sql = "select PHPSESSID, update_time, client_ip, data from session where PHPSESSID= ?";
@@ -65,6 +79,7 @@ class Session
 		return $result['data'];
 	}
 
+	//结束时和session_write_close()强制提交SESSION数据 $_SESSION[]="aaa";
 	public static function write($PHPSESSID, $data)
 	{
 		$sql = "select PHPSESSID, update_time, client_ip, data from session where PHPSESSID= ?";
@@ -72,8 +87,10 @@ class Session
 		$stmt = self::$handler->prepare($sql);
 
 		$stmt->execute(array($PHPSESSID));
-
-		if ($result = $stmt->fetch(PDO::FETCH_ASSOC)) {
+		$result = $stmt->fetch(PDO::FETCH_ASSOC);
+		@$resultRows = count($result);
+		// echo $resultRows; //调试
+		if ($resultRows == 4) {
 			if ($result['data'] != $data || self::$time > ($result['update_time'] + 30)) {
 				$sql = "update session set update_time = ?, data =? where PHPSESSID = ?";
 
@@ -81,7 +98,7 @@ class Session
 				$stm->execute(array(self::$time, $data, $PHPSESSID));
 			}
 		} else {
-			if (!empty($data)) {
+			if ($resultRows !== 4) {
 				$sql = "insert into session(PHPSESSID, update_time, client_ip, data) values(?,?,?,?)";
 
 				$sth = self::$handler->prepare($sql);
@@ -93,6 +110,7 @@ class Session
 		return true;
 	}
 
+	//session_destroy()
 	public static function destroy($PHPSESSID)
 	{
 		$sql = "delete from session where PHPSESSID = ?";
@@ -104,6 +122,7 @@ class Session
 		return true;
 	}
 
+	//ession.gc_probability和session.gc_divisor值决定的，open(), read() session_start也会执行gc
 	private static function gc($lifetime)
 	{
 		$sql = "delete from session where update_time < ?";

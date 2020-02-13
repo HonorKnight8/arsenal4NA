@@ -43,10 +43,10 @@ class Main
             case "WinFW_analyze":
                 $div .= $this->WinFW_analyze();
                 break;
-            case "Contacts":
-                // $div .= $this->Contacts();
-                $div .= new Contacts();
-                break;
+                // case "Contacts":
+                //     // $div .= $this->Contacts();
+                //     $div .= new Contacts();
+                //     break;
             case "Exam":
                 $div .= $this->Exam();
                 break;
