@@ -20,7 +20,8 @@ class Main
         //$form = '<form action="' . $this->action . '" method="post" >';
 
         $div = '<div id="main">';
-        $div .= '<tr><td><span style="font-size:30px;cursor:pointer" class="menubtn" title="打开菜单" onclick="openNav()">&#9776; </span></td><td ><span style="font-size:30px">arsenal4NA</span></td></tr>';
+
+
 
         // $div .= '<br /><center><a href="_libs/func_test.php">函数测试</a></center><br />';
 

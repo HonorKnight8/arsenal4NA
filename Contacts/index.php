@@ -6,22 +6,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>arsenal4NA</title>
 
-    <link rel="stylesheet" type="text/css" href="_css/sidebar.css" />
-    <link rel="stylesheet" type="text/css" href="_css/css.css" />
+    <link rel="stylesheet" type="text/css" href="../_css/sidebar.css" />
+    <link rel="stylesheet" type="text/css" href="../_css/css.css" />
 
     <script type="text/javascript">
         /*打开侧栏，修改侧栏宽度，主体左跨度、背景透明度*/
         function openNav() {
             document.getElementById("mySidenav").style.width = "180px";
             document.getElementById("main").style.marginLeft = "180px";
-            document.getElementById("topbar").style.marginLeft = "180px";
             document.body.style.backgroundColor = "rgba(0,0,0,0.4)";
         }
         /*关闭侧栏，恢复原始侧栏宽度，主体左跨度、背景透明度*/
         function closeNav() {
             document.getElementById("mySidenav").style.width = "0";
             document.getElementById("main").style.marginLeft = "0";
-            document.getElementById("topbar").style.marginLeft = "0";
             document.body.style.backgroundColor = "white";
         }
     </script>
@@ -30,9 +28,25 @@
 <body>
     <?php
     header('content-type:text/html;charset=utf-8');
-    spl_autoload_register(function ($className) {
-        include "_libs/" . strtolower($className) . ".class.php";
-    });
+    // spl_autoload_register(function ($className) {
+    //     include "_libs/" . strtolower($className) . ".class.php";
+    // });
+    spl_autoload_register(
+        function ($className) {
+            $path1 = "_libs/" . strtolower($className) . ".class.php";
+            $path2 = "../_libs/" . strtolower($className) . ".class.php";
+            if (file_exists($path1)) {
+                include $path1;
+            } else if (file_exists($path2)) {
+                include $path2;
+            }
+            // else {
+            //     include "nosuchfile.php";
+            // }
+        }
+    );
+
+
 
     //判断登录状态
 
