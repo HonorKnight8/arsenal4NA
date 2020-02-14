@@ -4,7 +4,7 @@ class Personal
     private $div_personal;
     function __construct($action = "")
     {
-        $this->div_login = '<div id="personal">';
+        $this->div_personal = '<div id="personal">';
         //判断登录状态
         if ($_SESSION['loginStatus'] == 1) {
             //已登录状态

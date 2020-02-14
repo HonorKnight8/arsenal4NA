@@ -23,14 +23,31 @@
             $path1 = "_libs/" . strtolower($className) . ".class.php";
             $path2 = "_login/" . strtolower($className) . ".class.php";
             $path3 = "Contacts/" . strtolower($className) . ".class.php";
+            $path4 = "ITAM/" . strtolower($className) . ".class.php";
+            $path5 = "MACInquire/" . strtolower($className) . ".class.php";
+            $path6 = "WinFWAnalyzer/" . strtolower($className) . ".class.php";
+            $path7 = "SubnetCalc/" . strtolower($className) . ".class.php";
+            $path8 = "Scripts/" . strtolower($className) . ".class.php";
+            $path9 = "Exam/" . strtolower($className) . ".class.php";
             if (file_exists($path1)) {
                 include $path1;
             } else if (file_exists($path2)) {
                 include $path2;
             } else if (file_exists($path3)) {
                 include $path3;
+            } else if (file_exists($path4)) {
+                include $path4;
+            } else if (file_exists($path5)) {
+                include $path5;
+            } else if (file_exists($path6)) {
+                include $path6;
+            } else if (file_exists($path7)) {
+                include $path7;
+            } else if (file_exists($path8)) {
+                include $path8;
+            } else if (file_exists($path9)) {
+                include $path9;
             }
-
             // else {
             //     include "nosuchfile.php";
             // }

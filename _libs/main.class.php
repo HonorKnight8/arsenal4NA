@@ -18,27 +18,24 @@ class Main
     {
         //$form = '<form action="' . $this->action . '" method="post" >';
         $div = '<div id="main">';
-        // $div .= '<br /><center><a href="_libs/func_test.php">函数测试</a></center><br />';
 
         switch ($this->menu) {
             case "HomePage":
                 $div .= $this->HomePage();
                 break;
             case "Scripts":
-                // $div .= $this->Scripts();
                 $div .= new Scripts();
                 break;
-            case "MAC_Inquire":
-                $div .= $this->MAC_Inquire();
+            case "MACInquire":
+                $div .= new MACInquire();
                 break;
-            case "Subnet_Calc":
-                $div .= $this->Subnet_Calc();
+            case "SubnetCalc":
+                $div .= new SubnetCalc();
                 break;
-            case "WinFW_analyze":
-                $div .= $this->WinFW_analyze();
+            case "WinFWAnalyzer":
+                $div .= new WinFWAnalyzer();
                 break;
             case "Contacts":
-                // $div .= $this->Contacts();
                 $div .= new Contacts();
                 break;
             case "contactsPersonalModify":
@@ -48,10 +45,10 @@ class Main
                 $div .= new ContactsHR();
                 break;
             case "Exam":
-                $div .= $this->Exam();
+                $div .= new Exam();
                 break;
             case "ITAM":
-                $div .= $this->ITAM();
+                $div .= new ITAM();
                 break;
             case "Personal":
                 $div .= new Personal();
@@ -79,37 +76,5 @@ class Main
 
         $div .= '</div>';
         return $div;
-    }
-    /*     private function Scripts()
-    {
-        // return new Scripts();
-        return "<p>Scripts";
-    } */
-    private function MAC_Inquire()
-    {
-        return "<p>MAC_Inquire";
-    }
-    private function Subnet_Calc()
-    {
-        return "<p>Subnet_Calc";
-    }
-    private function WinFW_analyze()
-    {
-        return "<p>WinFW_analyze";
-    }
-
-    //     private function Contacts()
-    // {
-    //     //判断登录状态
-    //     return "Contacts";
-    // }
-
-    private function Exam()
-    {
-        return "<p>Exam";
-    }
-    private function ITAM()
-    {
-        return "<p>ITAM";
     }
 }
