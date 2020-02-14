@@ -16,9 +16,35 @@
 <body>
     <?php
     header('content-type:text/html;charset=utf-8');
-    spl_autoload_register(function ($className) {
-        include "_libs/" . strtolower($className) . ".class.php";
-    });
+    // include "_libs/connect_DB.php";
+    // 优先从path1中找类文件，然后从path2中找
+    spl_autoload_register(
+        function ($className) {
+            $path1 = "_libs/" . strtolower($className) . ".class.php";
+            $path2 = "_login/" . strtolower($className) . ".class.php";
+            $path3 = "Contacts/" . strtolower($className) . ".class.php";
+            if (file_exists($path1)) {
+                include $path1;
+            } else if (file_exists($path2)) {
+                include $path2;
+            } else if (file_exists($path3)) {
+                include $path3;
+            }
+
+            // else {
+            //     include "nosuchfile.php";
+            // }
+        }
+    );
+    // spl_autoload_register(function ($className) {
+    //     include "_libs/" . strtolower($className) . ".class.php";
+    // });
+
+    // include '_libs/topbar.class.php';
+    // include '_libs/sidebar.class.php';
+    // include '_libs/main.class.php';
+    // include '../_libs/loginstatus.class.php';
+
 
     //判断登录状态
     if (isset($_GET["sid"])) {
@@ -31,7 +57,7 @@
     $getLoginStatus = new LoginStatus();
     // echo $getLoginStatus->getLoginStatus();
     $loginStatus = $getLoginStatus->getLoginStatus();
-
+    // var_dump($loginStatus);
 
 
     echo new TopBar($loginStatus);

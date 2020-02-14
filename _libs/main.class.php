@@ -4,7 +4,6 @@ class Main
     private $action;
     private $menu;
 
-
     function __construct($action = "")
     {
         $this->action = $action;
@@ -18,13 +17,8 @@ class Main
     function __toString()
     {
         //$form = '<form action="' . $this->action . '" method="post" >';
-
         $div = '<div id="main">';
-
-
-
         // $div .= '<br /><center><a href="_libs/func_test.php">函数测试</a></center><br />';
-
 
         switch ($this->menu) {
             case "HomePage":
@@ -43,15 +37,24 @@ class Main
             case "WinFW_analyze":
                 $div .= $this->WinFW_analyze();
                 break;
-                // case "Contacts":
-                //     // $div .= $this->Contacts();
-                //     $div .= new Contacts();
-                //     break;
+            case "Contacts":
+                // $div .= $this->Contacts();
+                $div .= new Contacts();
+                break;
+            case "contactsPersonalModify":
+                $div .= new ContactsPersonalModify();
+                break;
+            case "contactsHR":
+                $div .= new ContactsHR();
+                break;
             case "Exam":
                 $div .= $this->Exam();
                 break;
             case "ITAM":
                 $div .= $this->ITAM();
+                break;
+            case "Personal":
+                $div .= new Personal();
                 break;
             default:
                 $div .= $this->HomePage();
@@ -95,11 +98,12 @@ class Main
         return "<p>WinFW_analyze";
     }
 
-    /*     private function Contacts()
-    {
-        //判断登录状态
-        return "Contacts";
-    } */
+    //     private function Contacts()
+    // {
+    //     //判断登录状态
+    //     return "Contacts";
+    // }
+
     private function Exam()
     {
         return "<p>Exam";

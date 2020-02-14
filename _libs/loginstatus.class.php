@@ -16,11 +16,16 @@ class LoginStatus
         if (!empty($row['data']) && $_SESSION['loginStatus'] == 1) {
             //data不为空 且 loginStatus等于1，说明已登录
             //根据phphsessid获取用户名
-            $return = '欢迎你，' . $_SESSION['staffName'];
+            $stmt = $pdo->prepare("select staffID, staffName from staffs where staffID=:staffID");
+            $stmt->execute(array(":staffID" => $_SESSION["staffID"]));
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+            $_SESSION["staffName"] = $row["staffName"];
+            $return = 1;
             // return "已登录";
         } else {
             // 未登录
-            $return = '&nbsp;';
+            $_SESSION['loginStatus'] = 0;   //后续可以直接根据这个值来判断是否登录
+            $return = 0;
             // return "未登录";
         }
 
