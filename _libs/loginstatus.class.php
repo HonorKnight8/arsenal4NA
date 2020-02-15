@@ -1,7 +1,8 @@
 <?php
 class LoginStatus
 {
-    public function getLoginStatus()
+    // public function getLoginStatus()
+    function __construct()
     {
         require_once 'session.class.php';
         $PHPSESSID = session_id();
@@ -20,17 +21,17 @@ class LoginStatus
             $stmt->execute(array(":staffID" => $_SESSION["staffID"]));
             $row = $stmt->fetch(PDO::FETCH_ASSOC);
             $_SESSION["staffName"] = $row["staffName"];
-            $return = 1;
+            // $return = 1;
             // return "已登录";
         } else {
             // 未登录
             $_SESSION['loginStatus'] = 0;   //后续可以直接根据这个值来判断是否登录
-            $return = 0;
+            // $return = 0;
             // return "未登录";
         }
 
 
-        return  $return;
+        // return  $return;
 
 
 

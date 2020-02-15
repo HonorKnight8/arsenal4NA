@@ -1,0 +1,79 @@
+@charset "utf-8";
+/* CSS Document */
+
+/*除边栏顶栏外,全部其他链接的样式*/
+.link {
+    font-size: 20px;
+    color: #000000;
+    transition: 0.3s; 
+}
+ .link:hover{
+    color:rgb(115, 255, 0);
+} 
+
+.div_contacts {
+    width: 1000px;
+    margin: 0 auto;
+    /* div本身相对上级元素居中 */
+    text-align:center
+    /* div中的文字居中 */
+}
+
+/* .topbar {
+    width: 1000px;
+    margin: 0 auto;
+} */
+
+.div1 {
+    width: 640px;
+    margin: 0 auto;
+}
+
+/* .div2 {
+    width: 360px;
+    margin: 0 auto;
+} */
+
+table,
+        tr,
+        td,
+        th {
+            padding: 0;
+            /* 内边距 */
+            margin: 0;
+            /* 外边距 */
+
+            border: 1px solid rgb(0, 0, 0);
+            border-collapse: collapse;
+            /* border-collapse : separate | collapse
+            separate  :　 默认值。边框独立（标准HTML）
+            collapse  :　 相邻边被合并 */
+            border-spacing: 1;
+        }
+
+        table.staffinfo {
+            margin:0 auto;
+            /* width: 100%;
+            border-color: rgb(0, 0, 0); */
+        }
+
+        table.staffinfo tr {
+            line-height: 30px;
+            /* border-color: rgb(0, 0, 0); */
+        }
+
+        table.staffinfo th,
+        table.staffinfo td {
+            text-align: center;
+            /* border-color: rgb(0, 0, 0); */
+        }
+
+        /* 奇数行背景色 */
+        table.staffinfo tr:nth-child(odd) {
+            background: rgb(192, 248, 250);
+        }
+
+        /* 偶数行背景色 */
+        table.staffinfo tr:nth-child(even) {
+            background: rgb(130, 119, 230);
+        }

@@ -32,18 +32,10 @@ body {
     display: block;
     transition: 0.3s; /*标签延迟0.3s显示*/
 }
- 
 /*侧栏标签和关闭按钮光标的效果*/
-.sidenav a:hover, .offcanvas a:focus{
+.sidenav a:hover {
     color: #f1f1f1;
 }
-
-/*除边栏外,其他链接的鼠标悬浮样式*/
-.link:hover{
-    color:rgb(115, 255, 0);
-    text-decoration:none;
-}
-
 /*侧栏和关闭按钮的位置选择器*/
 .sidenav .closebtn {
     position: absolute;
@@ -54,7 +46,42 @@ body {
     color:rgb(109, 3, 3);
     margin-left: 50px;
 }
- 
+
+/*顶栏“打开菜单”按钮样式*/
+.openNav {
+    text-decoration: none;
+    color: #000000;
+    font-size:30px;
+    cursor:pointer;
+    transition: 0.3s; 
+}
+.openNav:hover{
+    color:rgb(115, 255, 0);
+}
+
+/*顶栏“用户信息”超链样式*/
+.userinfo {
+    text-decoration: none;
+    color: #000000;
+    font-size:30px;
+    cursor:pointer;
+    position:absolute;
+    top: 0px;
+    right: 10px;
+    transition: 0.3s; 
+}
+.userinfo:hover{
+    color:rgb(115, 255, 0);
+}
+
+/* 这是一个顶栏的一个span，输出程序执行结果*/
+.processResultMessage
+{
+    font-size:25px;
+    font-weight:900;
+    color:rgb(200, 0, 0);
+}
+
 /*主体内容*/
 #main #topbar {
     transition: margin-left .5s;/*主体内容延迟0.5s整体y右移动*/

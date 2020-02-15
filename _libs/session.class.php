@@ -33,17 +33,6 @@ class Session
 	//在运行session_start(); //启动
 	public static function open($path, $name)
 	{
-
-
-
-
-
-		// 一开始会话就应该写数据库
-		// id      l48p3d6ev2859dpmi4u4a5m2d0
-		// time    1581589859
-		// ip      ::1 
-		// data    permission|s:1:"0";staffID|s:5:"10001";loginStatus|i:1;staffName|s:6:"刘一";
-
 		return true;
 	}
 

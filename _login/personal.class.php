@@ -9,7 +9,7 @@ class Personal
         if ($_SESSION['loginStatus'] == 1) {
             //已登录状态
             $this->div_personal .= '<form action="_login/logout.php" method="post">';
-            $this->div_personal .= '<input type="submit" name="logout" value="退出"></form>';
+            $this->div_personal .= '<input type="submit" name="sub" value="退出"></form>';
         } else {
             $this->div_personal .= new Login();
         }

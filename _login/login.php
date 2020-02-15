@@ -32,6 +32,8 @@ if (isset($_POST["sub"])) {
     // var_dump($row);
     // var_dump(print_r($row));
     @$arrayRows = count($row);
+    // count() 函数计算数组中的单元数目或对象中的属性个数。 对于数组，返回其元素的个数，对于其他值，返回 1。如果参数是变量而变量没有定义，则返回 0。
+
     // echo $arrayRows;
     // var_dump($arrayRows);
     // echo '1<br />';
@@ -48,7 +50,9 @@ if (isset($_POST["sub"])) {
         // print_r($_COOKIE);
 
 
-        header("Location:../index.php");
+        // header("Location:../index.php");
+        header("Location:../index.php?action=" . $_SESSION['currentPage']); //跳转回登录前请求的页面
+
         // 前面有输出，不能用header函数，改用JS跳转
         // echo '<script>';
         // // echo "location='index.php?" . SID . "'";

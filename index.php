@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>arsenal4NA</title>
 
-    <link rel="stylesheet" type="text/css" href="_css/sidebar.css" />
-    <link rel="stylesheet" type="text/css" href="_css/css.css" />
+    <link rel="stylesheet" type="text/css" href="_css/main.css" />
+    <link rel="stylesheet" type="text/css" href="_css/others.css" />
     <script src="_js/js.js"></script>
 </head>
 
@@ -22,13 +22,14 @@
         function ($className) {
             $path1 = "_libs/" . strtolower($className) . ".class.php";
             $path2 = "_login/" . strtolower($className) . ".class.php";
-            $path3 = "Contacts/" . strtolower($className) . ".class.php";
-            $path4 = "ITAM/" . strtolower($className) . ".class.php";
-            $path5 = "MACInquire/" . strtolower($className) . ".class.php";
-            $path6 = "WinFWAnalyzer/" . strtolower($className) . ".class.php";
-            $path7 = "SubnetCalc/" . strtolower($className) . ".class.php";
-            $path8 = "Scripts/" . strtolower($className) . ".class.php";
-            $path9 = "Exam/" . strtolower($className) . ".class.php";
+            $path3 = "_process/" . strtolower($className) . ".class.php";
+            $path4 = "Contacts/" . strtolower($className) . ".class.php";
+            $path5 = "ITAM/" . strtolower($className) . ".class.php";
+            $path6 = "MACInquire/" . strtolower($className) . ".class.php";
+            $path7 = "WinFWAnalyzer/" . strtolower($className) . ".class.php";
+            $path8 = "SubnetCalc/" . strtolower($className) . ".class.php";
+            $path9 = "Scripts/" . strtolower($className) . ".class.php";
+            $path10 = "Exam/" . strtolower($className) . ".class.php";
             if (file_exists($path1)) {
                 include $path1;
             } else if (file_exists($path2)) {
@@ -47,6 +48,8 @@
                 include $path8;
             } else if (file_exists($path9)) {
                 include $path9;
+            } else if (file_exists($path10)) {
+                include $path10;
             }
             // else {
             //     include "nosuchfile.php";
@@ -62,29 +65,41 @@
     // include '_libs/main.class.php';
     // include '../_libs/loginstatus.class.php';
 
-
-    //判断登录状态
     if (isset($_GET["sid"])) {
         session_id($_GET["sid"]);
     }
+
+    //判断登录状态
     // $loginStatus = new LoginStatus;
     // $loginStatus->getLoginStatus();
 
     // echo LoginStatus::getLoginStatus();
-    $getLoginStatus = new LoginStatus();
+    new LoginStatus();
     // echo $getLoginStatus->getLoginStatus();
-    $loginStatus = $getLoginStatus->getLoginStatus();
+    // $loginStatus = $getLoginStatus->getLoginStatus();
     // var_dump($loginStatus);
 
+    // if (isset($_POST["submit"])) {
+    if (count($_POST) !== 0) {
+        //保存当前页面位置，用于登录后跳转回当前页面
+        $_SESSION['currentPage'] = $_REQUEST["action"];
+        // echo count($_POST) . '<br />';
+        // echo '<pre>';
+        // print_r($_POST);
+        // echo '</pre>';
+        // echo '触发post-submit';
+        echo new Process();
+    } else {
+        echo new TopBar($_SESSION['loginStatus']);
+        //顶栏
 
-    echo new TopBar($loginStatus);
-    //顶栏
+        echo new SideBar();
+        //侧栏
 
-    echo new SideBar();
-    //侧栏
+        echo new Main();
+        //主页面
+    }
 
-    echo new Main();
-    //主页面
     ?>
 </body>
 
