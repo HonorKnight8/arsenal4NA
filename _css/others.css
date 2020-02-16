@@ -51,9 +51,11 @@ body {
 .openNav {
     text-decoration: none;
     color: #000000;
-    font-size:30px;
+    font-size:28px;
     cursor:pointer;
     transition: 0.3s; 
+    top: 5px;
+    padding: 0px 0px 0px 0px;
 }
 .openNav:hover{
     color:rgb(115, 255, 0);
@@ -66,9 +68,10 @@ body {
     font-size:30px;
     cursor:pointer;
     position:absolute;
-    top: 0px;
-    right: 10px;
+    top: 5px;
+    right: 15px;
     transition: 0.3s; 
+    padding: 0px 0px 0px 0px;
 }
 .userinfo:hover{
     color:rgb(115, 255, 0);
@@ -85,7 +88,7 @@ body {
 /*主体内容*/
 #main #topbar {
     transition: margin-left .5s;/*主体内容延迟0.5s整体y右移动*/
-    padding: 16px;
+    /* padding: 16px; */
 }
  
 /*当文档高度小于450px时，改变侧栏的padding属性和字体大小*/

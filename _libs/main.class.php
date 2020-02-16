@@ -64,9 +64,9 @@ class Main
 
     private function HomePage()
     {
-        $div = '<div class="div1">';
+        $div = '<div class="div_homepage">';
         $div .= '<h4>&emsp;&emsp;arsenal4NA(arsenal for Network Administrator)，即：“网管军火库/工具箱”，本攻城狮自己写的一些网络管理、HelpDesk、基础IT运维工作中可能会用到的工具。</h4><br />';
-        $div .= '<hr style="height:1px;border:none;border-top:5px dashed LawnGreen;" width="75%" />';
+        $div .= '<hr style="height:2px;border:none;border-top:3px solid Black;" />';
         $div .= '<span><b>目前进度：</b></span><br /><br />';
         $div .= '<span>“常用脚本”：功能基本完成</span><br /><br />';
         $div .= '<span>“MAC查询”：功能基本完成</span><br />';

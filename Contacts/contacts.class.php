@@ -12,7 +12,6 @@ class Contacts
         } else if ($_SESSION['loginStatus'] == 1) {
             //已登录状态
             // $this->divContacts .= '<h4>&emsp;&emsp;arsenal4NA——内部通讯录，用于查询公司同事通讯录。</h4>';
-            $this->divContacts .= '<hr style="height:1px;border:none;border-top:5px dashed LawnGreen;" width="100%" />';
             $this->divContacts .= '<a href="index.php?action=Contacts" class="link">通讯录首页</a>&emsp;&emsp;';
             $this->divContacts .= '<a href="index.php?action=contactsPersonalModify" class="link" >修改个人信息</a>&emsp;&emsp;';
             //判断用户权限，99超管，15HR
@@ -26,7 +25,7 @@ class Contacts
 
     protected function thisPage()    //本页面特有信息
     {
-        $this->divContacts .= '<span><b>这是内部通讯录功能默认页</b></span><br />';
+        $this->divContacts .= '<br /><span><b>这是内部通讯录功能默认页</b></span><br />';
         $this->divContacts .= self::getSomebodyInfo();
     }
 

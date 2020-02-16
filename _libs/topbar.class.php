@@ -58,16 +58,16 @@ class TopBar
     function __toString()
     {
         $div = '<div class="topbar" id="topbar">';
-        $div .= '<span class="openNav" onclick="openNav()" title="打开菜单">&#9776;</span>';
-        $div .= '<span style="font-size:30px">arsenal4NA</span>';
+        $div .= '<span class="openNav" onclick="openNav()" title="打开菜单" top:6px;>&#9776;</span>';
+        $div .= '<span style="font-size:20px;font-weight:900;" top:6px;>&nbsp;&nbsp;&nbsp;arsenal4NA</span>';
         if ($this->message == NULL) {
             $div .= '<span style="font-size:18px">' . $this->title . '</span>';
         } else {
             $div .= '<span class="processResultMessage" >' . $this->message . '</span>';
         }
-        $div .= '<span style="font-size:20px;position:absolute;top:6px;right:60px;">' . $this->welcome . '</span>';
-        $div .= '<a class="userinfo" href="index.php?action=Personal" title="用户信息">&#9787</a><br />';
-        // $div .= '<span class="link" style="font-size:30px;cursor:pointer;position:absolute;top: 0;right: 0px;" title="登陆页面">&#9787</span>';
+        $div .= '<span style="font-size:20px;font-weight:300;position:absolute;top:12px;right:60px;">' . $this->welcome . '</span>';
+        $div .= '<a class="userinfo" href="index.php?action=Personal" title="用户信息">&#9787</a>';
+        $div .= '<hr style="height:0px;border:none;border-top:4px dashed LawnGreen;" width="100%" />';
         $div .= '</div>';
         return $div;
     }

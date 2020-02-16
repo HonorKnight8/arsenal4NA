@@ -38,20 +38,15 @@
 
 
 .div_contacts {
-    width: 1000px;
+    width: 100%;
     margin: 0 auto;
     /* div本身相对上级元素居中 */
     text-align:center
     /* div中的文字居中 */
 }
 
-/* .topbar {
-    width: 1000px;
-    margin: 0 auto;
-} */
-
-.div1 {
-    width: 640px;
+.div_homepage {
+    width: 50%;
     margin: 0 auto;
 }
 
