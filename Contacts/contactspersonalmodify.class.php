@@ -11,10 +11,12 @@ class ContactsPersonalModify extends Contacts
         $this->divContacts .= '<form action="" method="post" enctype="multipart/form-data">';
         $this->divContacts .= '<table border=1><tr><th colspan="2">修改头像照片</th></tr><tr><td>';
         $this->divContacts .= '<input type="file" name="file" id="file" placeholder="选择要上传的照片" required accept="image/jpeg, image/gif, image/png, image/webp" />';
-        $this->divContacts .= '</td><td><input type="submit" name="sub_CPM" value="上传" /></td></tr><tr>';
+        $this->divContacts .= '</td><td><input type="submit" name="sub_CPM_1" value="上传" /></td></tr><tr>';
         $this->divContacts .= '<td colspan="2">支持的文件格式有：jpg、gif、png、webp<br />';
         $this->divContacts .= '建议照片的横竖比例等于或接近于：1:1.45(证件照比例)';
         $this->divContacts .= '</td></tr></table></form>';
+
+        $this->divContacts .= '</td></tr></table><form action="" method="post"><input type="submit" name="login" value="登入" /></form><form action="" method="post"><input type="submit" name="logout" value="登出" /></form>';
     }
 
     function __toString()

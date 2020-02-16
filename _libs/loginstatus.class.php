@@ -5,6 +5,8 @@ class LoginStatus
     function __construct()
     {
         require_once 'session.class.php';
+        require_once 'connect_DB.php';
+        Session::start($pdo);
         $PHPSESSID = session_id();
         // echo $PHPSESSID . "<br />"; // 调试
 

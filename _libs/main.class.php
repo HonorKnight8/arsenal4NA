@@ -8,6 +8,7 @@ class Main
     {
         $this->action = $action;
         $this->menu = isset($_REQUEST["action"]) ? $_REQUEST["action"] : "0";
+        $_SESSION['currentPage'] = $this->menu; //保存当前页面位置，用于登录后跳转回当前页面
         //echo $this->action;
         //echo $this->shape;
     }
@@ -17,7 +18,7 @@ class Main
     function __toString()
     {
         //$form = '<form action="' . $this->action . '" method="post" >';
-        $div = '<div id="main">';
+        $div = '<div class="main" id="main">';
 
         switch ($this->menu) {
             case "HomePage":

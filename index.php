@@ -90,7 +90,7 @@
         // echo '触发post-submit';
         echo new Process();
     } else {
-        echo new TopBar($_SESSION['loginStatus']);
+        echo new TopBar();
         //顶栏
 
         echo new SideBar();

@@ -13,8 +13,6 @@ class Login
             $this->div_login .= new Personal();
         } else {
             //登录页面
-
-
             $this->div_login .= '<form action="_login/login.php" method="post">';
             $this->div_login .= '<table align="center" border="1" width="300">';
             $this->div_login .= '<caption><h1>用户登录</h1></caption>';
@@ -23,7 +21,7 @@ class Login
             $this->div_login .= '<tr><th>密 码</th><td>';
             $this->div_login .= '<input type="password" name="password"></td></tr>';
             $this->div_login .= '<tr><td colspan="2" align="center">';
-            $this->div_login .= '<input type="submit" name="sub" value="登 录"></td></tr></table></form>';
+            $this->div_login .= '<input type="submit" name="login" value="登 录"></td></tr></table></form>';
         }
     }
 

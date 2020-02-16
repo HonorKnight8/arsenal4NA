@@ -131,5 +131,5 @@ class Session
 // }catch(PDOException $e){
 // 	echo $e->getMessage();
 // }
-require_once 'connect_DB.php';
-Session::start($pdo);
+// require_once 'connect_DB.php';
+// Session::start($pdo);

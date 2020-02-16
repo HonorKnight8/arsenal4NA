@@ -8,15 +8,13 @@ class Contacts
         //判断登录状态
         $this->divContacts = '<div class="div_contacts">';
         if ($_SESSION['loginStatus'] == 0) {
-            //保存当前页面位置，用于登录后跳转回当前页面
-            $_SESSION['currentPage'] = $_REQUEST["action"];
             $this->divContacts .= new Login();
         } else if ($_SESSION['loginStatus'] == 1) {
             //已登录状态
             // $this->divContacts .= '<h4>&emsp;&emsp;arsenal4NA——内部通讯录，用于查询公司同事通讯录。</h4>';
             $this->divContacts .= '<hr style="height:1px;border:none;border-top:5px dashed LawnGreen;" width="100%" />';
-            $this->divContacts .= '<a href="index.php?action=Contacts" class="link">内部通讯录</a><br />';
-            $this->divContacts .= '<a href="index.php?action=contactsPersonalModify" class="link" >个人修改</a><br />';
+            $this->divContacts .= '<a href="index.php?action=Contacts" class="link">通讯录首页</a>&emsp;&emsp;';
+            $this->divContacts .= '<a href="index.php?action=contactsPersonalModify" class="link" >修改个人信息</a>&emsp;&emsp;';
             //判断用户权限，99超管，15HR
             if ($_SESSION['permission'] == 99 || $_SESSION['permission'] == 15) {
                 $this->divContacts .= '<a href="index.php?action=contactsHR" class="link" >HR管理</a><br />';

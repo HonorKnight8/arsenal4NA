@@ -4,10 +4,12 @@
 // if (isset($_GET["sid"])) {
 // 	session_id($_GET["sid"]);
 // }
-require_once '../_libs/session.class.php';
-// echo session_id() . "<br />";
-if (isset($_POST["sub"])) {
 
+// echo session_id() . "<br />";
+if (isset($_POST["login"])) {
+    require_once '../_libs/session.class.php';
+    require_once '../_libs/connect_DB.php';
+    Session::start($pdo);
     //测试1开始，列举并输出表名
     // $stmt = $pdo->prepare("show tables");
     // $stmt->execute();

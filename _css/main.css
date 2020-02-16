@@ -2,14 +2,40 @@
 /* CSS Document */
 
 /*除边栏顶栏外,全部其他链接的样式*/
-.link {
+.link {  
+    /* background: rgb(111, 111, 111);   */
+    border: 2px solid #111;
+    border-radius: 4px;     
+    /* 圆角 */
+    border-spacing: 0;  
+    box-shadow: 2px 2px 5px rgb(17, 17, 17);  
+    padding: 2px 2px 2px 2px;
+    /* 内边距：上右下左 */
+    vertical-align: baseline;  
+}  
+  
+.main a {
+    background: #111;
     font-size: 20px;
-    color: #000000;
+    font-weight:777;
+    color: #818181;
     transition: 0.3s; 
-}
- .link:hover{
-    color:rgb(115, 255, 0);
-} 
+    text-decoration:none;
+}  
+  
+.main a:hover {
+
+    color:#f1f1f1;
+    text-decoration: underline;  
+}  
+
+
+
+
+
+
+
+
 
 .div_contacts {
     width: 1000px;
