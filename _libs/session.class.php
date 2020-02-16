@@ -124,12 +124,7 @@ class Session
 	}
 }
 
-
-
-// try{
-// 	$pdo=new PDO("mysql:host=localhost;dbname=xsphpdb", "root", "123456");
-// }catch(PDOException $e){
-// 	echo $e->getMessage();
-// }
+// 这两行相当于session_start();
 // require_once 'connect_DB.php';
 // Session::start($pdo);
+// 由index.php中的new LoginStatus();替代

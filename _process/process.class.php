@@ -14,14 +14,10 @@ class Process
         //获取post动作，调用相应的方法进行处理，并返回处理结果
         if (isset($_POST['login'])) {
             $this->login();
-            $this->processResultMessage = '！！！登录页面！！！';
-            // $div .= $this->HomePage();
-            // $div .= new Scripts();
+            // $this->processResultMessage = '！！！登录页面！！！';
         } else if (isset($_POST['logout'])) {
             $this->logout();
             // $this->processResultMessage = '！！！退出！！！';
-            // $div .= $this->HomePage();
-            // $div .= new Scripts();
         } else if (isset($_POST['sub_CPM_1'])) {
             $this->processResultMessage = '！！！修改照片！！！';
         } else {
@@ -49,8 +45,8 @@ class Process
 
     private function Login()
     {
-        require_once '_libs/session.class.php';
-        require_once '../_libs/connect_DB.php';
+        require '_libs/connect_DB.php';
+
         $stmt = $pdo->prepare("select staffID, password, permission from userpwd where staffID=:staffID and password=:password");
         $stmt->execute(array(":staffID" => $_POST["staffID"], ":password" => sha1($_POST["password"])));
 
@@ -64,7 +60,6 @@ class Process
 
         // echo $arrayRows;
         // var_dump($arrayRows);
-        // echo '1<br />';
         // if ($result->num_rows > 0) {
         if ($arrayRows == 3) {
             // $row = $result->fetch_assoc();
@@ -72,7 +67,6 @@ class Process
             $_SESSION["permission"] = $row["permission"];
             $_SESSION["staffID"] = $row["staffID"];
             $_SESSION["loginStatus"] = 1;
-            // echo '2<br />';
             // print_r($row);
             // echo '<br />' . $_COOKIE['PHPSESSID'] . '<br />';
             // print_r($_COOKIE);
@@ -81,7 +75,7 @@ class Process
             // header("Location:../index.php");
             header("Location:../index.php?action=" . $_SESSION['currentPage']); //跳转回登录前请求的页面
 
-            // 前面有输出，不能用header函数，改用JS跳转
+            // 若前面有输出，则不能用header函数，改用JS跳转
             // echo '<script>';
             // // echo "location='index.php?" . SID . "'";
             // // echo "location='index.php?PHPSESSID=" . session_id() . "'";
@@ -90,6 +84,8 @@ class Process
             // //如果开启cookie，该值为空；
             // //如果未开启cookie，SID相当于“PHPSESSID=&lt;?php echo session_id() ?&gt;”
             // echo '</script>';
+        } else {
+            echo "用户名密码有误！<br />";
         }
     }
 

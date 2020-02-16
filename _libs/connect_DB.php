@@ -17,6 +17,7 @@ $driver_opt = array();
 
 try {
     $pdo = new PDO($dsn, $user, $pwd, $driver_opt);
+    // var_dump($pdo);
 
     // $pdo->setAttribute(PDO::ATTR_AUTOCOMMIT, 0);
 } catch (PDOException $e) {

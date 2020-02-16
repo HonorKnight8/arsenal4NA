@@ -13,7 +13,8 @@ class Login
             $this->div_login .= new Personal();
         } else {
             //登录页面
-            $this->div_login .= '<form action="_login/login.php" method="post">';
+            // $this->div_login .= '<form action="_login/login.php" method="post">';
+            $this->div_login .= '<form action="" method="post">';
             $this->div_login .= '<table align="center" border="1" width="300">';
             $this->div_login .= '<caption><h1>用户登录</h1></caption>';
             $this->div_login .= '<tr><th>用户名</th><td>';
