@@ -4,7 +4,7 @@ class Preferences
     protected $div_preferences;
     function __construct()
     {
-        $this->div_preferences = '<div id="personal">';
+        $this->div_preferences = '<div class="div_preferences" id="div_preferences">';
         //判断登录状态
         if ($_SESSION['loginStatus'] == 0) {
             // header("Location:../index.php?action=" . $_SESSION['currentPage']);

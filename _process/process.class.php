@@ -19,7 +19,7 @@ class Process
         } else if (isset($_POST['logout'])) {
             $this->logout();
             // $this->processResultMessage = '！！！退出！！！';
-        } else if (isset($_POST['sub_CPM_1'])) {
+        } else if (isset($_POST['PreferencesPersonal_1'])) {
             $this->staffID = $_SESSION["staffID"];
             $this->changeHeadPhoto($this->staffID);
         } else {
@@ -55,49 +55,59 @@ class Process
         // echo "</pre>";
         // echo $fileInfo['tmp_name'];
 
-        //判断是否合乎要求
-        if ($fileInfo["type"] !== "image/jpeg" && $fileInfo["type"] !== "image/gif" && $fileInfo["type"] !== "image/png" && $fileInfo["type"] !== "image/bmp" && $fileInfo["type"] !== "image/webp") {
-            //文件类型错误
-            $this->processResultMessage = '!!文件类型错误，仅支持：jpg、gif、png、bmp、webp';
-        } else if ($fileInfo["size"] > 1048576) {
-            //文件大小超出限制
-            $this->processResultMessage = '!!文件大小超出限制（1MB）';
+        //判断是否修改头像
+        if ($_FILES['file']['size'] !== 0) {
+            //判断是否合乎要求
+            if ($fileInfo["type"] !== "image/jpeg" && $fileInfo["type"] !== "image/gif" && $fileInfo["type"] !== "image/png" && $fileInfo["type"] !== "image/bmp" && $fileInfo["type"] !== "image/webp") {
+                //文件类型错误
+                $this->processResultMessage = '!!文件类型错误，仅支持：jpg、gif、png、bmp、webp';
+            } else if ($fileInfo["size"] > 1048576) {
+                //文件大小超出限制
+                $this->processResultMessage = '!!文件大小超出限制（1MB）';
+            } else {
+
+                //转存
+                $filename = "./Contacts/images/headphoto_upload_orignal/" . $staffID . '-' . time() . '.' . mb_substr($fileInfo['type'], 6);
+                if (!file_exists('./Contacts')) {
+                    mkdir('./Contacts', 0777, true);
+                }
+                if (!file_exists('./Contacts/images')) {
+                    mkdir('./Contacts/images', 0777, true);
+                }
+                if (!file_exists('./Contacts/images/headphoto_upload_orignal')) {
+                    mkdir('./Contacts/images/headphoto_upload_orignal', 0777, true);
+                }
+                move_uploaded_file($fileInfo["tmp_name"], $filename);
+
+                //调整尺寸，暂存
+                $imageInfo = ImageOprate::getImageInfo($filename);
+                // echo "<pre>";
+                // print_r($imageInfo);
+                // echo "</pre>";
+
+                if (!file_exists('./Contacts/tmp')) {
+                    mkdir('./Contacts/tmp', 0777, true);
+                }
+
+                $headPhoto = ImageOprate::thumb($filename, $dst_w = 220, $dst_w = 320, $dest = './Contacts/tmp', $pre = 'headPhoto_');
+
+                $b64 = ImageOprate::Base64EncodeImage($headPhoto);
+
+                // 上传数据库
+                require '_libs/connect_DB.php';
+                $stmt = $pdo->prepare("update staffs set headPhoto=:headPhoto,showHeadPhoto=:showHeadPhoto where staffID=:staffID");
+                $stmt->execute(array(":headPhoto" => $b64, ":showHeadPhoto" => $_POST['showHeadPhoto'], ":staffID" => $staffID));
+
+                //删除暂存文件
+                unlink($headPhoto);
+                // echo 1;
+            }
         } else {
-
-            //转存
-            $filename = "./Contacts/images/headphoto_upload_orignal/" . $staffID . '-' . time() . '.' . mb_substr($fileInfo['type'], 6);
-            if (!file_exists('./Contacts')) {
-                mkdir('./Contacts', 0777, true);
-            }
-            if (!file_exists('./Contacts/images')) {
-                mkdir('./Contacts/images', 0777, true);
-            }
-            if (!file_exists('./Contacts/images/headphoto_upload_orignal')) {
-                mkdir('./Contacts/images/headphoto_upload_orignal', 0777, true);
-            }
-            move_uploaded_file($fileInfo["tmp_name"], $filename);
-
-            //调整尺寸，暂存
-            $imageInfo = ImageOprate::getImageInfo($filename);
-            // echo "<pre>";
-            // print_r($imageInfo);
-            // echo "</pre>";
-
-            if (!file_exists('./Contacts/tmp')) {
-                mkdir('./Contacts/tmp', 0777, true);
-            }
-
-            $headPhoto = ImageOprate::thumb($filename, $dst_w = 220, $dst_w = 320, $dest = './Contacts/tmp', $pre = 'headPhoto_');
-
-            $b64 = ImageOprate::Base64EncodeImage($headPhoto);
-
-            // 上传数据库
+            //头像是否显示[showHeadPhoto] => hide
             require '_libs/connect_DB.php';
-            $stmt = $pdo->prepare("update staffs set headPhoto=:headPhoto where staffID=:staffID");
-            $stmt->execute(array(":headPhoto" => $b64, ":staffID" => $staffID));
-
-            //删除暂存文件
-            unlink($headPhoto);
+            $stmt = $pdo->prepare("update staffs set showHeadPhoto=:showHeadPhoto where staffID=:staffID");
+            $stmt->execute(array(":showHeadPhoto" => $_POST['showHeadPhoto'], ":staffID" => $staffID));
+            // echo 2;
         }
     }
 
