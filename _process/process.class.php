@@ -6,6 +6,7 @@ class Process
     protected $staffID;
     function __construct()
     {
+        $this->staffID = $_SESSION["staffID"];
         //调试信息
         // echo count($_POST) . '<br />';
         // echo '<pre>';
@@ -20,8 +21,10 @@ class Process
             $this->logout();
             // $this->processResultMessage = '！！！退出！！！';
         } else if (isset($_POST['PreferencesPersonal_1'])) {
-            $this->staffID = $_SESSION["staffID"];
             $this->changeHeadPhoto($this->staffID);
+        } else if (isset($_POST['PreferencesPersonal_2'])) {
+            // $this->changePassword($this->staffID);
+            $this->processResultMessage = '！！！修改密码！！！';
         } else {
             //返回数据出错
             $this->processResultMessage = '！！！提交数据出错，请检查！！！';
@@ -41,6 +44,24 @@ class Process
         $result .= new Main();
         //主页面
         return $result;
+    }
+
+
+
+    public function changePassword($staffID)
+    {
+        //获取post
+        echo "<pre>";
+        print_r($_POST);
+        echo "</pre>";
+
+        //验证旧密码合法性，验证正确性
+
+        //验证新密码的两次输入一致性，合法性
+
+        //验证码
+
+        //执行修改
     }
 
     public function changeHeadPhoto($staffID)
