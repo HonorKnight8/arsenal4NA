@@ -39,20 +39,20 @@ class Main
             case "Contacts":
                 $div .= new Contacts();
                 break;
-            case "contactsPersonalModify":
-                $div .= new ContactsPersonalModify();
-                break;
-            case "contactsHR":
-                $div .= new ContactsHR();
-                break;
             case "Exam":
                 $div .= new Exam();
                 break;
             case "ITAM":
                 $div .= new ITAM();
                 break;
-            case "Personal":
-                $div .= new Personal();
+            case "preferences":
+                $div .= new Preferences();
+                break;
+            case "PreferencesPersonal":
+                $div .= new PreferencesPersonal();
+                break;
+            case "PreferencesHR":
+                $div .= new PreferencesHR();
                 break;
             default:
                 $div .= $this->HomePage();

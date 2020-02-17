@@ -31,20 +31,20 @@ class TopBar
             case "Contacts":
                 $this->title = '——公司同事通讯录';
                 break;
-            case "contactsPersonalModify":
-                $this->title = '——公司同事通讯录';
-                break;
-            case "contactsHR":
-                $this->title = '——公司同事通讯录';
-                break;
             case "Exam":
                 $this->title = '——在线考试系统';
                 break;
             case "ITAM":
                 $this->title = '——ITAM：IT资产管理系统';
                 break;
-            case "Personal":
-                $this->title = '——常用脚本下载';
+            case "Preferences":
+                $this->title = '——偏好设置';
+                break;
+            case "PreferencesPersonal":
+                $this->title = '——偏好设置';
+                break;
+            case "PreferencesHR":
+                $this->title = '——偏好设置';
                 break;
             default:
                 $this->title = NULL;
@@ -57,8 +57,11 @@ class TopBar
     // }
     function __toString()
     {
+        // onclick
+        // onmouseover    onmouseout 含子元素
+        // onmouseenter   onmouseleave 不含子元素
         $div = '<div class="topbar" id="topbar">';
-        $div .= '<span class="openNav" onclick="openNav()" title="打开菜单" top:6px;>&#9776;</span>';
+        $div .= '<span class="openNav" onmouseenter="openNav()" title="打开菜单" top:6px;>&#9776;</span>';
         $div .= '<span style="font-size:20px;font-weight:900;" top:6px;>&nbsp;&nbsp;&nbsp;arsenal4NA</span>';
         if ($this->message == NULL) {
             $div .= '<span style="font-size:18px">' . $this->title . '</span>';
@@ -66,7 +69,7 @@ class TopBar
             $div .= '<span class="processResultMessage" >' . $this->message . '</span>';
         }
         $div .= '<span style="font-size:20px;font-weight:300;position:absolute;top:12px;right:60px;">' . $this->welcome . '</span>';
-        $div .= '<a class="userinfo" href="index.php?action=Personal" title="用户信息">&#9787</a>';
+        $div .= '<a class="userinfo" href="index.php?action=preferences" title="偏好设置">&#9787</a>';
         $div .= '<hr style="height:0px;border:none;border-top:4px dashed LawnGreen;" width="100%" />';
         $div .= '</div>';
         return $div;

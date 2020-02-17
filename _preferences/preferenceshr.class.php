@@ -1,10 +1,10 @@
 <?php
 
-class ContactsHR extends Contacts
+class PreferencesHR extends Preferences
 {
     protected function thisPage()    //本页面特有信息
     {
-        $this->divContacts .= '<br /><span><b>这是内部通讯录HR管理页</b></span><br />';
+        $this->div_preferences .= '<br /><span><b>这是偏好设置：HR管理页</b></span><br />';
     }
 
     function __toString()
@@ -13,7 +13,7 @@ class ContactsHR extends Contacts
             //已登录状态
             self::thisPage();
         }
-        $this->divContacts .= '</div>';
-        return $this->divContacts;
+        $this->div_preferences .= '</div>';
+        return $this->div_preferences;
     }
 }

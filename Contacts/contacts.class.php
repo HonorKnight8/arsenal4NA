@@ -11,15 +11,6 @@ class Contacts
             $this->divContacts .= new Login();
         } else if ($_SESSION['loginStatus'] == 1) {
             //已登录状态
-            // $this->divContacts .= '<h4>&emsp;&emsp;arsenal4NA——内部通讯录，用于查询公司同事通讯录。</h4>';
-            $this->divContacts .= '<a href="index.php?action=Contacts" class="link">通讯录首页</a>&emsp;&emsp;';
-            $this->divContacts .= '<a href="index.php?action=contactsPersonalModify" class="link" >修改个人信息</a>&emsp;&emsp;';
-            //判断用户权限，99超管，15HR
-            if ($_SESSION['permission'] == 99 || $_SESSION['permission'] == 15) {
-                $this->divContacts .= '<a href="index.php?action=contactsHR" class="link" >HR管理</a><br />';
-            }
-        } else {
-            return "登录状态异常，请清空cookie后重试";
         }
     }
 
@@ -38,8 +29,6 @@ class Contacts
         $this->divContacts .= '</div>';
         return $this->divContacts;
     }
-
-
     private function getSomebodyInfo()
     {
         // //从数据库读取自己的资料
@@ -85,6 +74,8 @@ class Contacts
 
         return  $result;
     }
+
+
 
 
 

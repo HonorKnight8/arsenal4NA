@@ -28,6 +28,7 @@ class LoginStatus
         } else {
             // 未登录
             $_SESSION['loginStatus'] = 0;   //后续可以直接根据这个值来判断是否登录
+            $_SESSION['permission'] = -1;   //后面边栏的条件判断要用到，避免报“Notice”
             // $return = 0;
             // return "未登录";
         }

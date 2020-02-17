@@ -1,4 +1,7 @@
 <?php
+
+//当前session表字段：PHPSESSID, update_time, client_ip, data
+//考虑新加字段：StaffID、默认超时时间、用户自定义超时时间（勾选“保存登录状态”）、客户端信息？
 class Session
 {
 	private static $handler = null;
@@ -55,11 +58,14 @@ class Session
 			return '';
 		}
 
+		//问题2（可能是这个位置）：登录用户直接关闭浏览器，来自于该用户的IP的session（该IP的一直没访问，没触发），隔天都没被回收
 		if (self::$ip  != $result["client_ip"]) {
 			self::destroy($PHPSESSID);
 			return '';
 		}
 
+
+		//问题1：这里只是盲目地把刷新时间久于$lifetime地session删掉，造成已登录用户，一段时间没动作之后，退出登录状态
 		if (($result["update_time"] + self::$lifetime) < self::$time) {
 			self::destroy($PHPSESSID);
 			return '';
@@ -123,6 +129,8 @@ class Session
 		return true;
 	}
 }
+
+
 
 // 这两行相当于session_start();
 // require_once 'connect_DB.php';

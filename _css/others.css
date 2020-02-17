@@ -6,7 +6,7 @@ body {
     transition: background-color .5s;
 }
  
-/*侧边栏选择器*/
+/*侧栏*/
 .sidenav {
     height: 100%;
     width: 0; /*原始宽度*/
@@ -20,22 +20,37 @@ body {
     transition: 0.5s; /*侧栏延迟0.5s显示*/
     padding-top: 60px;
 }
- 
-/*侧边栏标签选择器*/
-.sidenav a {
+
+/*侧栏二级菜单*/
+.sub_menu {
     /* padding: 8px 8px 8px 32px; */
-    padding: 4px 32px 4px 4px;
+    padding: 1px 32px 1px 1px;
+    /* 内边距：上右下左 */
     text-decoration: none;
-    font-size: 25px;
+    font-size: 18px;
     text-align: right;
     color: #818181;
     display: block;
     transition: 0.3s; /*标签延迟0.3s显示*/
 }
-/*侧栏标签和关闭按钮光标的效果*/
+/*侧栏一级菜单和关闭按钮*/
+.menu, .closebtn{
+    /* padding: 8px 8px 8px 32px; */
+    padding: 4px 32px 4px 4px;
+    text-decoration: none;
+    font-size: 30px;
+    text-align: right;
+    color: #818181;
+    display: block;
+    transition: 0.3s; /*标签延迟0.3s显示*/
+}
+/*侧栏一级菜单、二级菜单和关闭按钮鼠标悬浮的效果*/
 .sidenav a:hover {
     color: #f1f1f1;
 }
+
+
+
 /*侧栏和关闭按钮的位置选择器*/
 .sidenav .closebtn {
     position: absolute;
@@ -46,6 +61,13 @@ body {
     color:rgb(109, 3, 3);
     margin-left: 50px;
 }
+/* 侧栏水平分割线样式 */
+.sidehr{
+    border-style:dashed #f1f1f1;
+    /* border:opx; */
+    /* color:#f1f1f1; */
+}
+
 
 /*顶栏“打开菜单”按钮样式*/
 .openNav {
@@ -91,8 +113,6 @@ body {
     /* padding: 16px; */
 }
  
-/*当文档高度小于450px时，改变侧栏的padding属性和字体大小*/
-/* @media screen and (max-height: 450px) {
-  .sidenav {padding-top: 15px;}
-  .sidenav a {font-size: 18px;}
-} */
+
+
+

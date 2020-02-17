@@ -21,7 +21,7 @@
     spl_autoload_register(
         function ($className) {
             $path1 = "_libs/" . strtolower($className) . ".class.php";
-            $path2 = "_login/" . strtolower($className) . ".class.php";
+            $path2 = "_preferences/" . strtolower($className) . ".class.php";
             $path3 = "_process/" . strtolower($className) . ".class.php";
             $path4 = "Contacts/" . strtolower($className) . ".class.php";
             $path5 = "ITAM/" . strtolower($className) . ".class.php";
