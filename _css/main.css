@@ -51,15 +51,19 @@
     /* div本身相对上级元素居中 */
 }
 
+.div_login{
+    width: 60%;
+    margin: 0 auto;
+    /* div本身相对上级元素居中 */
+}
 
 
-
-.div_contacts {
+/* .div_contacts {
     width: 100%;
     margin: 0 auto;
     text-align:center
-    /* div中的文字居中 */
-}
+    div中的文字居中
+} */
 /* .div2 {
     width: 360px;
     margin: 0 auto;

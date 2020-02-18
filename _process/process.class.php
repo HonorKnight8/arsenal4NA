@@ -23,8 +23,8 @@ class Process
         } else if (isset($_POST['PreferencesPersonal_1'])) {
             $this->changeHeadPhoto($this->staffID);
         } else if (isset($_POST['PreferencesPersonal_2'])) {
-            // $this->changePassword($this->staffID);
-            $this->processResultMessage = '！！！修改密码！！！';
+            $this->changePassword($this->staffID);
+            // $this->processResultMessage = '！！！修改密码！！！';
         } else {
             //返回数据出错
             $this->processResultMessage = '！！！提交数据出错，请检查！！！';
@@ -50,22 +50,46 @@ class Process
 
     public function changePassword($staffID)
     {
-        //获取post
-        echo "<pre>";
-        print_r($_POST);
-        echo "</pre>";
-
-        //验证旧密码合法性，验证正确性
-
-        //验证新密码的两次输入一致性，合法性
+        // echo "<pre>";
+        // print_r($_POST);
+        // echo "</pre>";
 
         //验证码
+        if ($_POST['inputcaptchaget_2'] == NULL || strtolower($_POST['inputcaptchaget_2']) !== strtolower($_SESSION['captchaCreated'])) {
+            $this->processResultMessage = '！！验证码输入错误';
+        } else {
+            //验证旧密码合法性，验证正确性
+            require '_libs/connect_DB.php';
+            $stmt = $pdo->prepare("select password from userpwd where staffID=:staffID");
+            $stmt->execute(array(":staffID" => $staffID));
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        //执行修改
+            if (sha1($_POST['currentPassword']) !== $row["password"]) {
+                $this->processResultMessage = '！！当前密码输入错误';
+            } else if ($_POST['newpassword_1'] == NULL || $_POST['newpassword_1'] !== $_POST['newpassword_1']) {
+                //验证新密码的两次输入一致性
+                $this->processResultMessage = '！！两次输入的新密码不一致';
+            } else if (preg_match('/[^a-z0-9]/i', $_POST['newpassword_1']) || !(preg_match('/[0-9]/', $_POST['newpassword_1']) && preg_match('/[a-z]/', $_POST['newpassword_1']) && preg_match('/[A-Z]/', $_POST['newpassword_1']))) {
+                //验证新密码的合规性之包含字符
+                $this->processResultMessage = '！！密码只能包含数字、大小写字母三种字符，且三种字符至少各有一个';
+            } else if (strlen($_POST['newpassword_1']) < 8 || strlen($_POST['newpassword_1']) > 24) {
+                //验证新密码的合规性之长度
+                $this->processResultMessage = '！！允许密码长度：8-24';
+            } else {
+                //执行修改
+                $stmt = $pdo->prepare("update userpwd set password=:password where staffID=:staffID");
+                $stmt->execute(array(":password" => sha1($_POST['newpassword_1']), ":staffID" => $staffID));
+                // $this->processResultMessage = '！！修改密码';
+            }
+        }
     }
 
     public function changeHeadPhoto($staffID)
     {
+        // echo "<pre>";
+        // print_r($_POST);
+        // echo "</pre>";
+
         // echo "<pre>";
         // print_r($_FILES);
         // echo "</pre>";
@@ -76,107 +100,116 @@ class Process
         // echo "</pre>";
         // echo $fileInfo['tmp_name'];
 
-        //判断是否修改头像
-        if ($_FILES['file']['size'] !== 0) {
-            //判断是否合乎要求
-            if ($fileInfo["type"] !== "image/jpeg" && $fileInfo["type"] !== "image/gif" && $fileInfo["type"] !== "image/png" && $fileInfo["type"] !== "image/bmp" && $fileInfo["type"] !== "image/webp") {
-                //文件类型错误
-                $this->processResultMessage = '!!文件类型错误，仅支持：jpg、gif、png、bmp、webp';
-            } else if ($fileInfo["size"] > 1048576) {
-                //文件大小超出限制
-                $this->processResultMessage = '!!文件大小超出限制（1MB）';
-            } else {
-
-                //转存
-                $filename = "./Contacts/images/headphoto_upload_orignal/" . $staffID . '-' . time() . '.' . mb_substr($fileInfo['type'], 6);
-                if (!file_exists('./Contacts')) {
-                    mkdir('./Contacts', 0777, true);
-                }
-                if (!file_exists('./Contacts/images')) {
-                    mkdir('./Contacts/images', 0777, true);
-                }
-                if (!file_exists('./Contacts/images/headphoto_upload_orignal')) {
-                    mkdir('./Contacts/images/headphoto_upload_orignal', 0777, true);
-                }
-                move_uploaded_file($fileInfo["tmp_name"], $filename);
-
-                //调整尺寸，暂存
-                $imageInfo = ImageOprate::getImageInfo($filename);
-                // echo "<pre>";
-                // print_r($imageInfo);
-                // echo "</pre>";
-
-                if (!file_exists('./Contacts/tmp')) {
-                    mkdir('./Contacts/tmp', 0777, true);
-                }
-
-                $headPhoto = ImageOprate::thumb($filename, $dst_w = 220, $dst_w = 320, $dest = './Contacts/tmp', $pre = 'headPhoto_');
-
-                $b64 = ImageOprate::Base64EncodeImage($headPhoto);
-
-                // 上传数据库
-                require '_libs/connect_DB.php';
-                $stmt = $pdo->prepare("update staffs set headPhoto=:headPhoto,showHeadPhoto=:showHeadPhoto where staffID=:staffID");
-                $stmt->execute(array(":headPhoto" => $b64, ":showHeadPhoto" => $_POST['showHeadPhoto'], ":staffID" => $staffID));
-
-                //删除暂存文件
-                unlink($headPhoto);
-                // echo 1;
-            }
+        //判断验证码是否正确
+        if ($_POST['inputcaptchaget_1'] == NULL || strtolower($_POST['inputcaptchaget_1']) !== strtolower($_SESSION['captchaCreated'])) {
+            $this->processResultMessage = '！！验证码输入错误';
         } else {
-            //头像是否显示[showHeadPhoto] => hide
-            require '_libs/connect_DB.php';
-            $stmt = $pdo->prepare("update staffs set showHeadPhoto=:showHeadPhoto where staffID=:staffID");
-            $stmt->execute(array(":showHeadPhoto" => $_POST['showHeadPhoto'], ":staffID" => $staffID));
-            // echo 2;
+            //判断是否修改头像
+            if ($_FILES['file']['size'] !== 0) {
+                //判断是否合乎要求
+                if ($fileInfo["type"] !== "image/jpeg" && $fileInfo["type"] !== "image/gif" && $fileInfo["type"] !== "image/png" && $fileInfo["type"] !== "image/bmp" && $fileInfo["type"] !== "image/webp") {
+                    //文件类型错误
+                    $this->processResultMessage = '!!文件类型错误，仅支持：jpg、gif、png、bmp、webp';
+                } else if ($fileInfo["size"] > 1048576) {
+                    //文件大小超出限制
+                    $this->processResultMessage = '!!文件大小超出限制（1MB）';
+                } else {
+
+                    //转存
+                    $filename = "./Contacts/images/headphoto_upload_orignal/" . $staffID . '-' . time() . '.' . mb_substr($fileInfo['type'], 6);
+                    if (!file_exists('./Contacts')) {
+                        mkdir('./Contacts', 0777, true);
+                    }
+                    if (!file_exists('./Contacts/images')) {
+                        mkdir('./Contacts/images', 0777, true);
+                    }
+                    if (!file_exists('./Contacts/images/headphoto_upload_orignal')) {
+                        mkdir('./Contacts/images/headphoto_upload_orignal', 0777, true);
+                    }
+                    move_uploaded_file($fileInfo["tmp_name"], $filename);
+
+                    //调整尺寸，暂存
+                    $imageInfo = ImageOprate::getImageInfo($filename);
+                    // echo "<pre>";
+                    // print_r($imageInfo);
+                    // echo "</pre>";
+
+                    if (!file_exists('./Contacts/tmp')) {
+                        mkdir('./Contacts/tmp', 0777, true);
+                    }
+
+                    $headPhoto = ImageOprate::thumb($filename, $dst_w = 220, $dst_w = 320, $dest = './Contacts/tmp', $pre = 'headPhoto_');
+
+                    $b64 = ImageOprate::Base64EncodeImage($headPhoto);
+
+                    // 上传数据库
+                    require '_libs/connect_DB.php';
+                    $stmt = $pdo->prepare("update staffs set headPhoto=:headPhoto,showHeadPhoto=:showHeadPhoto where staffID=:staffID");
+                    $stmt->execute(array(":headPhoto" => $b64, ":showHeadPhoto" => $_POST['showHeadPhoto'], ":staffID" => $staffID));
+
+                    //删除暂存文件
+                    unlink($headPhoto);
+                    // echo 1;
+                }
+            } else {
+                //头像是否显示[showHeadPhoto] => hide
+                require '_libs/connect_DB.php';
+                $stmt = $pdo->prepare("update staffs set showHeadPhoto=:showHeadPhoto where staffID=:staffID");
+                $stmt->execute(array(":showHeadPhoto" => $_POST['showHeadPhoto'], ":staffID" => $staffID));
+                // echo 2;
+            }
         }
     }
 
 
     private function Login()
     {
-        require '_libs/connect_DB.php';
-
-        $stmt = $pdo->prepare("select staffID, password, permission from userpwd where staffID=:staffID and password=:password");
-        $stmt->execute(array(":staffID" => $_POST["staffID"], ":password" => sha1($_POST["password"])));
-
-        $row = $stmt->fetch(PDO::FETCH_ASSOC);
-
-        // print_r($row);
-        // var_dump($row);
-        // var_dump(print_r($row));
-        @$arrayRows = count($row);
-        // count() 函数计算数组中的单元数目或对象中的属性个数。 对于数组，返回其元素的个数，对于其他值，返回 1。如果参数是变量而变量没有定义，则返回 0。
-
-        // echo $arrayRows;
-        // var_dump($arrayRows);
-        // if ($result->num_rows > 0) {
-        if ($arrayRows == 3) {
-            // $row = $result->fetch_assoc();
-
-            $_SESSION["permission"] = $row["permission"];
-            $_SESSION["staffID"] = $row["staffID"];
-            $_SESSION["loginStatus"] = 1;
-            // print_r($row);
-            // echo '<br />' . $_COOKIE['PHPSESSID'] . '<br />';
-            // print_r($_COOKIE);
-
-
-            // header("Location:../index.php");
-            header("Location:../index.php?action=" . $_SESSION['currentPage']); //跳转回登录前请求的页面
-
-            // 若前面有输出，则不能用header函数，改用JS跳转
-            // echo '<script>';
-            // // echo "location='index.php?" . SID . "'";
-            // // echo "location='index.php?PHPSESSID=" . session_id() . "'";
-            // echo "location='../index.php?" . SID . "'";
-            // //常量：SID
-            // //如果开启cookie，该值为空；
-            // //如果未开启cookie，SID相当于“PHPSESSID=&lt;?php echo session_id() ?&gt;”
-            // echo '</script>';
+        if ($_POST['inputcaptchaget'] == NULL || strtolower($_POST['inputcaptchaget']) !== strtolower($_SESSION['captchaCreated'])) {
+            $this->processResultMessage = '！！验证码输入错误';
         } else {
-            $this->processResultMessage = '！！用户名密码有误！！';
-            // echo "用户名密码有误！<br />";
+            require '_libs/connect_DB.php';
+
+            $stmt = $pdo->prepare("select staffID, password, permission from userpwd where staffID=:staffID and password=:password");
+            $stmt->execute(array(":staffID" => $_POST["staffID"], ":password" => sha1($_POST["password"])));
+
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            // print_r($row);
+            // var_dump($row);
+            // var_dump(print_r($row));
+            @$arrayRows = count($row);
+            // count() 函数计算数组中的单元数目或对象中的属性个数。 对于数组，返回其元素的个数，对于其他值，返回 1。如果参数是变量而变量没有定义，则返回 0。
+
+            // echo $arrayRows;
+            // var_dump($arrayRows);
+            // if ($result->num_rows > 0) {
+            if ($arrayRows == 3) {
+                // $row = $result->fetch_assoc();
+
+                $_SESSION["permission"] = $row["permission"];
+                $_SESSION["staffID"] = $row["staffID"];
+                $_SESSION["loginStatus"] = 1;
+                // print_r($row);
+                // echo '<br />' . $_COOKIE['PHPSESSID'] . '<br />';
+                // print_r($_COOKIE);
+
+
+                // header("Location:../index.php");
+                header("Location:../index.php?action=" . $_SESSION['currentPage']); //跳转回登录前请求的页面
+
+                // 若前面有输出，则不能用header函数，改用JS跳转
+                // echo '<script>';
+                // // echo "location='index.php?" . SID . "'";
+                // // echo "location='index.php?PHPSESSID=" . session_id() . "'";
+                // echo "location='../index.php?" . SID . "'";
+                // //常量：SID
+                // //如果开启cookie，该值为空；
+                // //如果未开启cookie，SID相当于“PHPSESSID=&lt;?php echo session_id() ?&gt;”
+                // echo '</script>';
+            } else {
+                $this->processResultMessage = '！！用户名密码有误！！';
+                // echo "用户名密码有误！<br />";
+            }
         }
     }
 

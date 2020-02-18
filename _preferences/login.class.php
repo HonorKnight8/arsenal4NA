@@ -4,25 +4,24 @@ class Login
     private $div_login;
     function __construct($action = "")
     {
-        $this->div_login = '<div id="login">';
+        $this->div_login = '<div class="div_login" id="div_login">';
 
         // 判断登录状态
         // $_SESSION['loginStatus'] = 0;
         if ($_SESSION['loginStatus'] == 1) {
             //个人后台
-            $this->div_login .= new Personal();
+            $this->div_login .= new PreferencesPersonal();
         } else {
             //登录页面
             // $this->div_login .= '<form action="_login/login.php" method="post">';
             $this->div_login .= '<form action="" method="post">';
-            $this->div_login .= '<table align="center" border="1" width="300">';
-            $this->div_login .= '<caption><h1>用户登录</h1></caption>';
-            $this->div_login .= '<tr><th>用户名</th><td>';
-            $this->div_login .= '<input type="text" name="staffID"></td></tr>';
-            $this->div_login .= '<tr><th>密 码</th><td>';
-            $this->div_login .= '<input type="password" name="password"></td></tr>';
-            $this->div_login .= '<tr><td colspan="2" align="center">';
-            $this->div_login .= '<input type="submit" name="login" value="登 录"></td></tr></table></form>';
+            $this->div_login .= '<fieldset><legend>用户登录</legend>';
+            $this->div_login .= '&emsp;&emsp;&emsp;工号：<input type="text" name="staffID" style="width:250px" placeholder="请输入用户名（即工号）..." required><br />';
+            $this->div_login .= '&emsp;&emsp;&emsp;密码：<input type="password" name="password" style="width:250px" placeholder="请输入密码以验证身份..." required><br />';
+            $this->div_login .= '输入验证码：<input type="text" name="inputcaptchaget" id="" style="width:250px" placeholder="请输入下方的验证码……"><br />';
+            $this->div_login .= '&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<img src="_libs/captchaget0.php" alt="" id="verifyimage" /><a onclick="document.getElementById(\'verifyimage\').src=\'_libs/captchaget0.php?r=\'+Math.random()" href="javascript:void(0)">显示/更换验证码</a><br />';
+            $this->div_login .= '&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<input type="submit" name="login" value="登 录">';
+            $this->div_login .= '</fieldset></form>';
         }
     }
 
