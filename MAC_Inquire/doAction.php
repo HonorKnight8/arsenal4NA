@@ -28,7 +28,8 @@
     header('content-type:text/html;charset=utf-8');
     session_start();
 
-    require_once '../_libs/functions.php';
+    // require_once '../_libs/functions.php';
+    require_once '../_libs/groceries.class.php';
 
     $rereg = '<a href="MAC_Inquire.php">后退</a>';
     //echo "<pre>";print_r($_POST);echo "</pre><br />";
@@ -43,7 +44,7 @@
     $showinput = $_POST["macinput"];
     //$macinput = strtr($showinput, "：", ":");			//将全角“：”转换为半角“:”，未达到预期
     //$macinput = str_replace('：', ':', $showinput);	//将全角“：”转换为半角“:”
-    $macinput = convertStrType($showinput, 'TOSBC');    //将全角“：”转换为半角“:”
+    $macinput = Groceries::convertStrType($showinput, 'TOSBC');    //将全角“：”转换为半角“:”
 
     if ($verify_r != $verify_a) {
         $macinputErr = "验证码输入错误";
@@ -53,7 +54,7 @@
         if (preg_match('/[^a-f0-9\-\:\s]/i', $macinput)) {    //验证输入字符串是否包含不应该在MAC地址中出现的字符
             $macinputErr = "错误：输入的MAC地址只能包含：“0至9”、“A至F”、“空格”、“-”、“:”（注意冒号为半角）";
         } else {
-            $macinput = text_input($macinput);    //调用函数，处理字符串
+            $macinput = Groceries::text_input($macinput);    //调用函数，处理字符串
             $macinput = preg_replace('/[\:]/', '', $macinput);
             $macinput = preg_replace('/[\-]/', '', $macinput);
 

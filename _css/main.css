@@ -69,6 +69,13 @@
     margin: 0 auto;
 } */
 
+/*当文档宽度小于800px时，改变*/
+@media screen and (max-width: 1152px) {
+    .div_preferences{ width: 100%;}
+    /* .sidenav {padding-top: 15px;}
+    .sidenav a {font-size: 18px;} */
+  }
+
 table,
         tr,
         td,

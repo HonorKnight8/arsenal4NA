@@ -7,7 +7,7 @@ class Preferences
         $this->div_preferences = '<div class="div_preferences" id="div_preferences">';
         //判断登录状态
         if ($_SESSION['loginStatus'] == 0) {
-            // header("Location:../index.php?action=" . $_SESSION['currentPage']);
+            // header("Location:index.php?action=login");
             $this->div_preferences .= new Login();
         } else {
             //已登录状态，显示个人后台
@@ -20,16 +20,16 @@ class Preferences
 
     protected function thisPage()    // 本页面特有内容
     {
-        // $this->divContacts .= '<br /><span><b>这是内部通讯录功能默认页</b></span><br />';
-        // $this->divContacts .= self::getSomebodyInfo();
+        $form = '';
+        $form .= '<br /><span><b>这是“测试：偏好设置功能——默认页”</b></span><br />';
+        return $form;
     }
 
     function __toString()
     {
-        // if ($_SESSION['loginStatus'] == 1) {
-        //     // 已登录状态，附加本页面特有内容
-        //     self::thisPage();
-        // }
+        if ($_SESSION['loginStatus'] !== 0) {
+            $this->div_preferences .= self::thispage();
+        }
         $this->div_preferences .= '</div>';
         return $this->div_preferences;
     }
