@@ -13,8 +13,8 @@ class SideBar
             'HomePage' => array(
                 'HomePage' => '<a class="menu" href="index.php?action=HomePage" title="首页">首页</a>',
                 'Scripts' => '<a class="sub_menu" href="index.php?action=Scripts" title="批处理、注册表、LinuxShell脚本下载">常用脚本</a>',
-                'MACInquire' => '<a class="sub_menu" href="MAC_Inquire/MAC_Inquire.php" title="根据MAC地址查询所属厂商">MAC查询</a>',
-                //'MACInquire'=> '<a class="sub_menu" href="index.php?action=MACInquire" title="根据MAC地址查询所属厂商">MAC查询</a>',
+                // 'MACInquire' => '<a class="sub_menu" href="MAC_Inquire/MAC_Inquire.php" title="根据MAC地址查询所属厂商">MAC查询</a>',
+                'MACInquire' => '<a class="sub_menu" href="index.php?action=MACInquire" title="根据MAC地址查询所属厂商">MAC查询</a>',
                 'SubnetCalc' => '<a class="sub_menu" href="index.php?action=SubnetCalc" title="子网掩码计算及相关工具">子网计算</a>',
                 'WinFWAnalyzer' => '<a class="sub_menu" href="index.php?action=WinFWAnalyzer" title="Windows防火墙日志简要分析">防火墙日志</a>'
             ),

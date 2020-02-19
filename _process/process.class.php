@@ -17,9 +17,6 @@ class Process
         if (isset($_POST['login'])) {
             $this->login();
             // Self::$processResultMessage = '！！！登录页面！！！';
-        } else if (isset($_POST['logout'])) {
-            $this->logout();
-            // Self::$processResultMessage = '！！！退出！！！';
         } else if (isset($_POST['PreferencesPersonal_1'])) {
             ProcessContacts::changeHeadPhoto($this->staffID);
         } else if (isset($_POST['PreferencesPersonal_2'])) {
@@ -29,6 +26,13 @@ class Process
             // $this->changePassword($this->staffID);
             Self::$processResultMessage = ProcessContacts::modifyStaffInfo($_SESSION["staffID"], $_SESSION["staffID"]);
             // Self::$processResultMessage = '！！人员信息修改';
+        } else if (isset($_POST['macinquire'])) {
+            // $this->changePassword($this->staffID);
+            // Self::$processResultMessage = ProcessContacts::modifyStaffInfo($_SESSION["staffID"], $_SESSION["staffID"]);
+            MACInquire::$div_inquireResult = MACInquire::doInquire($_POST['macinquire']);
+        } else if (isset($_POST['logout'])) {
+            $this->logout();
+            // Self::$processResultMessage = '！！！退出！！！';
         } else {
             //返回数据出错
             Self::$processResultMessage = '！！！提交数据出错，请检查！！！';

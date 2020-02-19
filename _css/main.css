@@ -45,7 +45,7 @@
 }
 
 
-.div_preferences{
+.div_preferences, .div_macinquire{
     width: 60%;
     margin: 0 auto;
     /* div本身相对上级元素居中 */
@@ -71,7 +71,7 @@
 
 /*当文档宽度小于800px时，改变*/
 @media screen and (max-width: 1152px) {
-    .div_preferences{ width: 100%;}
+    .div_preferences, .div_macinquire{ width: 100%;}
     /* .sidenav {padding-top: 15px;}
     .sidenav a {font-size: 18px;} */
   }

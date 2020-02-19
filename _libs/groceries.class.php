@@ -29,10 +29,6 @@ class Groceries
         //' (单引号) 	设置了 ENT_QUOTES 后， &#039; (如果是 ENT_HTML401) ，或者 &apos; (如果是 //ENT_XML1、 ENT_XHTML 或 ENT_HTML5)。
         //< (小于) 	&lt;
         //> (大于) 	&gt;
-        $data = preg_replace('/[\s+]/', '', $data); //去掉任意空格
-        $data = preg_replace('/[\n+]/', '', $data);    //去掉任意空格
-        $data = preg_replace('/[\r+]/', '', $data);    //去掉任意空格
-        $data = preg_replace('/[\t+]/', '', $data);    //去掉任意空格
         return $data;
     }
 
