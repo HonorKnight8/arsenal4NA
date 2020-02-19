@@ -4,6 +4,21 @@ class Process
     protected $menu;
     static $processResultMessage;
     protected $staffID;
+
+    function __toString()
+    {
+        //将程序处理结果传给Topbar，将信息显示在topbar上面
+        $result = new TopBar(Self::$processResultMessage);
+        //顶栏
+
+        $result .= new SideBar();
+        //侧栏
+
+        $result .= new Main();
+        //主页面
+        return $result;
+    }
+
     function __construct()
     {
         $this->staffID = $_SESSION["staffID"];
@@ -30,6 +45,9 @@ class Process
             // $this->changePassword($this->staffID);
             // Self::$processResultMessage = ProcessContacts::modifyStaffInfo($_SESSION["staffID"], $_SESSION["staffID"]);
             MACInquire::$div_inquireResult = MACInquire::doInquire($_POST['macinquire']);
+        } else if (isset($_POST['inquireStaff'])) {
+            $postArray = self::handlePostData($_POST);
+            Contacts::StaffInfoPool($postArray);
         } else if (isset($_POST['logout'])) {
             $this->logout();
             // Self::$processResultMessage = '！！！退出！！！';
@@ -39,19 +57,9 @@ class Process
         }
     }
 
-    function __toString()
-    {
-
-        //将程序处理结果传给Topbar，将信息显示在topbar上面
-        $result = new TopBar(Self::$processResultMessage);
-        //顶栏
-
-        $result .= new SideBar();
-        //侧栏
-
-        $result .= new Main();
-        //主页面
-        return $result;
+    static function handlePostData($postArray)          //+++++++++++实际功能还什么都没写+++++++++++
+    { //预处理POST数据
+        return $postArray;
     }
 
 

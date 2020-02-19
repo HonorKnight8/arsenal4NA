@@ -38,8 +38,8 @@ class MACInquire
         $page .= '输入MAC地址：(进行批量查询，请用<span style="background-color:gray;font-weight:900;color:rgb(200, 0, 0);" >逗号“,”分隔</span>)<br />';
         $page .= '&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<textarea name="inputmac" rows="10" cols="33" placeholder="请输入有效的MAC地址……" required></textarea><br />';
         $page .= '输入验证码：<input type="text" name="inputcaptchaget" id="" placeholder="请输入下方的验证码……" required autocomplete="off" /><br />';
-        $page .= '&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<img src="_libs/captchaget0.php" alt="" id="verifyimage_1" /><a onclick="document.getElementById(\'verifyimage_1\').src=\'_libs/captchaget0.php?r=\'+Math.random()" href="javascript:void(0)">显示/更换验证码</a><br />';
-        $page .= '&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<input type="submit" name="macinquire" value="查询">';
+        $page .= '&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<img src="_libs/captchaget0.php" alt="" id="verifyimage" /><a class="a_in_content" onclick="document.getElementById(\'verifyimage\').src=\'_libs/captchaget0.php?r=\'+Math.random()" href="javascript:void(0)">显示/更换验证码</a><br />';
+        $page .= '&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<input class="submit" type="submit" name="macinquire" value="查询">';
         $page .= '</fieldset></form>';
 
         return $page;

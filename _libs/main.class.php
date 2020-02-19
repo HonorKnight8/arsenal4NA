@@ -67,13 +67,19 @@ class Main
         $div = '<div class="div_homepage">';
         $div .= '<h4>&emsp;&emsp;arsenal4NA(arsenal for Network Administrator)，即：“网管军火库/工具箱”，本攻城狮自己写的一些网络管理、HelpDesk、基础IT运维工作中可能会用到的工具。</h4><br />';
         $div .= '<hr style="height:2px;border:none;border-top:3px solid Black;" />';
-        $div .= '<span><b>目前进度：</b></span><br /><br />';
-        $div .= '<span>“常用脚本”：功能基本完成</span><br /><br />';
-        $div .= '<span>“MAC查询”：功能基本完成</span><br />';
-        $div .= '<span>&emsp;&emsp;1、基于过程开发，待改造</span><br />';
-        $div .= '<span>&emsp;&emsp;2、添加批量查询功能</span><br /><br />';
-        $div .= '<span>“通讯录”：正在开发</span><br /><br />';
-        $div .= '<span>其他：未动工</span><br /><br />';
+        $div .= '<b>目前进度：</b><br /><br />';
+
+        $div .= '1. 小工具类<br />';
+        $div .= '&emsp;&emsp;* MAC地址归属厂商查询，**完成**<br />';
+        $div .= '&emsp;&emsp;* 子网计算，0%<br />';
+        $div .= '&emsp;&emsp;* Windows系统防火墙日志分析，0%<br />';
+        $div .= '&emsp;&emsp;* 常用脚本，*基本完成*<br />';
+        $div .= '2. 通讯录系统，**开发中**<br />';
+        $div .= '3. 会议室预定、公共设备借用，0%<br />';
+        $div .= '4. 考试系统，0%<br />';
+        $div .= '5. IT资产管理系统，0%<br />';
+        $div .= '6. _后台管理，开发中，与各功能模块同步进行<br />';
+        $div .= '7. _整体框架，*基本完成*，持续调整<br />';
 
         $div .= '</div>';
         return $div;

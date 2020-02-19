@@ -13,68 +13,107 @@
     /* 内边距：上右下左 */
     vertical-align: baseline;  
 }  
-  
-.main a {
-    background: #111;
-    font-size: 20px;
-    font-weight:777;
-    color: #818181;
-    transition: 0.3s; 
-    text-decoration:none;
-}  
-  
-.main a:hover {
 
+.a_in_content {
+    /* padding: 8px 8px 8px 32px; */
+    padding: 3px 5px 5px 5px;
+    /* 内边距：上右下左 */
+    text-decoration: none;
+    font-size: 18px;
+    font-weight:777;
+    /* text-align: right; */
+    color: #818181;
+    background: #111;
+    /* display: block; */
+    transition: 0.3s; /*标签延迟0.3s显示*/
+}
+
+.a_in_content:hover {
     color:#f1f1f1;
     text-decoration: underline;  
 }  
 
+/* .main a {
+    text-decoration:none;
+    font-size: 20px;
+    font-weight:777;
+    color: #818181;
+    background: #111;
+    transition: 0.3s; 
+}  
+
+.main a:hover {
+    color:#f1f1f1;
+    text-decoration: underline;  
+}   */
 
 
 
 
 
-
-
-
-
-
-.div_homepage {
-    width: 50%;
-    margin: 0 auto;
-}
-
-
-.div_preferences, .div_macinquire{
+.div_homepage,
+.div_login,
+.div_macinquire,
+.div_contacts,
+.div_preferences
+{
     width: 60%;
     margin: 0 auto;
     /* div本身相对上级元素居中 */
 }
-
-.div_login{
-    width: 60%;
-    margin: 0 auto;
-    /* div本身相对上级元素居中 */
-}
-
-
-/* .div_contacts {
-    width: 100%;
-    margin: 0 auto;
-    text-align:center
-    div中的文字居中
-} */
-/* .div2 {
-    width: 360px;
-    margin: 0 auto;
-} */
 
 /*当文档宽度小于800px时，改变*/
 @media screen and (max-width: 1152px) {
-    .div_preferences, .div_macinquire{ width: 100%;}
+    .div_homepage,
+    .div_login,
+    .div_macinquire,
+    .div_contacts,
+    .div_preferences
+    { width: 100%;}
     /* .sidenav {padding-top: 15px;}
     .sidenav a {font-size: 18px;} */
   }
+
+
+
+
+/* ================================输入框样式================================ */
+input{
+    outline-style: none ;
+    border: 1px solid #ccc; 
+    border-radius: 3px;
+    padding: 5px 5px;
+    /* width: 250px; */
+    font-size: 14px;
+    font-weight: 700;
+    font-family: "Microsoft soft";
+}
+input:focus{
+    border-color: #66afe9;
+    outline: 0;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6)
+}
+
+.submit{
+    outline-style: none ;
+    border: 1px solid #ccc; 
+    border-radius: 3px;
+    padding: 5px 5px;
+    width: 260px;
+    font-size: 14px;
+    font-weight: 700;
+    font-family: "Microsoft soft";
+}
+.submit:focus{
+    border-color: #66afe9;
+    outline: 0;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6)
+}
+
+
+/* ///////////////////////// */
 
 table,
         tr,

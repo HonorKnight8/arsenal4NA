@@ -14,7 +14,7 @@ class Preferences
 
             //显示退出连接
             $this->div_preferences .= '<form action="" method="post">';
-            $this->div_preferences .= '<input type="submit" name="logout" value="退出"></form>';
+            $this->div_preferences .= '<input class="submit" type="submit" name="logout" value="退出/登出"></form>';
         }
     }
 
