@@ -7,7 +7,7 @@ class Preferences
         $this->div_preferences = '<div class="div_preferences" id="div_preferences">';
         //判断登录状态
         if ($_SESSION['loginStatus'] == 0) {
-            // header("Location:index.php?action=login");
+            // header("Location:index.php?Page=login");
             $this->div_preferences .= new Login();
         } else {
             //已登录状态，显示个人后台

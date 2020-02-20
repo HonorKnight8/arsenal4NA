@@ -2,7 +2,7 @@
 class Groceries
 {
     /**
-     * 检查网页控件post提交的日期是都合法
+     * 检查网页控件post提交的日期是合法日期数值
      * @param  string $data  输入字符串
      * @return bool 返回结果
      */
@@ -15,20 +15,38 @@ class Groceries
         }
     }
 
-
-    static function text_input($data)
+    /**
+     * 通用的，对输入字符串进行处理：去掉头尾空格，去掉反斜杠，特殊字符转换为HTML实体
+     * @param   string   $data 输入字符串
+     * @return  string   $data 返回字符串
+     */
+    static function cleanInputString_1($data)
     {    //定义函数，对输入进行预处理
         $data = trim($data);
         //trim() 函数，移除字符串两侧的空白字符或其他预定义字符。（之去掉两侧的，字符串中间的不处理）
         $data = stripslashes($data);
         //stripslashes() 函数，删除反斜杠：
-        $data = htmlspecialchars($data);
+        $data = htmlspecialchars($data, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
         //htmlspecialchars() 函数，将特殊字符转换为 HTML 实体
         //& (& 符号) 	&amp;
-        //" (双引号) 	&quot;，除非设置了 ENT_NOQUOTES
+        //" (双引号) 	&quot;
         //' (单引号) 	设置了 ENT_QUOTES 后， &#039; (如果是 ENT_HTML401) ，或者 &apos; (如果是 //ENT_XML1、 ENT_XHTML 或 ENT_HTML5)。
         //< (小于) 	&lt;
         //> (大于) 	&gt;
+        return $data;
+    }
+
+    /**
+     * 字符串处理：去掉头尾空格，去掉反斜杠，特殊字符转换为HTML实体
+     * @param   string   $data 输入字符串
+     * @param   string   $type 类型（实现不同类型不同处理）
+     * @return  string   $data 返回字符串
+     */
+    static function cleanInputString_2($data, $type = 1)
+    {
+        // $type
+        // 1    纯数字，大小写字母（密码）
+
         return $data;
     }
 

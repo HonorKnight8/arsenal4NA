@@ -11,7 +11,7 @@ class TopBar
         $this->welcome = ($_SESSION['loginStatus'] == 1) ? '欢迎你，' . $_SESSION['staffName'] : '&nbsp;';
         $this->message = $message;
 
-        $this->menu = isset($_REQUEST["action"]) ? $_REQUEST["action"] : NULL;
+        $this->menu = isset($_REQUEST["Page"]) ? $_REQUEST["Page"] : NULL;
         switch ($this->menu) {
             case "HomePage":
                 $this->title = NULL;
@@ -53,7 +53,7 @@ class TopBar
     // function __construct($action = "")
     // {
     //     $this->action = $action;
-    //     $this->menu = isset($_REQUEST["action"]) ? $_REQUEST["action"] : "0";
+    //     $this->menu = isset($_REQUEST["Page"]) ? $_REQUEST["Page"] : "0";
     // }
     function __toString()
     {
@@ -69,7 +69,7 @@ class TopBar
             $div .= '<span class="processResultMessage" >' . $this->message . '</span>';
         }
         $div .= '<span style="font-size:20px;font-weight:300;position:absolute;top:12px;right:60px;">' . $this->welcome . '</span>';
-        $div .= '<a class="userinfo" href="index.php?action=preferences" title="偏好设置">&#9787</a>';
+        $div .= '<a class="userinfo" href="index.php?Page=preferences" title="偏好设置">&#9787</a>';
         $div .= '<hr style="height:0px;border:none;border-top:4px dashed LawnGreen;" width="100%" />';
         $div .= '</div>';
         return $div;

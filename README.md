@@ -59,7 +59,7 @@ GitHub、VScode、Notepad++、Xdebug...<br />
 朋友谭工...<br />
 
 ### PS:
-本项目因为包含了一个IEEE的MAC地址资料文件（/MACInquire/oui.txt），所以代码行数的统计数值需要注意。<br />
+本项目因为包含了一个IEEE的MAC地址资料文件（/MACInquire/oui.txt），所以相关贡献者的代码行数统计数值需要注意。<br />
 1. 准确的数量应该是：
 * 当前项目代码行数 = 总代码行数 - 总删除行数 - 当前oui.txt文件行数
 * 项目历史总提交代码行数 = 总代码行数 - 历史总提交oui.txt文件行数

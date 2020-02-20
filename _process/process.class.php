@@ -39,7 +39,7 @@ class Process
             // Self::$processResultMessage = '！！！修改密码！！！';
         } else if (isset($_POST['PreferencesPersonal_3'])) {
             // $this->changePassword($this->staffID);
-            Self::$processResultMessage = ProcessContacts::modifyStaffInfo($_SESSION["staffID"], $_SESSION["staffID"]);
+            // Self::$processResultMessage = ProcessContacts::modifyStaffInfo($_SESSION["staffID"], $_SESSION["staffID"]);
             // Self::$processResultMessage = '！！人员信息修改';
         } else if (isset($_POST['macinquire'])) {
             // $this->changePassword($this->staffID);
@@ -131,7 +131,7 @@ class Process
 
 
                 // header("Location:../index.php");
-                header("Location:../index.php?action=" . $_SESSION['currentPage']); //跳转回登录前请求的页面
+                header("Location:../index.php?Page=" . $_SESSION['currentPage']); //跳转回登录前请求的页面
 
                 // 若前面有输出，则不能用header函数，改用JS跳转
                 // echo '<script>';

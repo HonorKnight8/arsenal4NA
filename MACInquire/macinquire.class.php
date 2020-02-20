@@ -64,7 +64,7 @@ class MACInquire
         } else {
 
             $mac = Groceries::convertStrType($_POST['inputmac'], 'TOSBC'); //将全角“：”转换为半角“:”，将全角“，”转换为半角“,”
-            $mac = Groceries::text_input($mac); //去掉首尾空格、反斜杠，特殊字符转换为HTML实体
+            $mac = Groceries::cleanInputString_1($mac); //去掉首尾空格、反斜杠，特殊字符转换为HTML实体
             $mac = str_replace(PHP_EOL, '', $mac);      //去掉分行
             //去掉行末的逗号。并不需要，反正中间如果多了逗号，会造成数组的某个值为空，在后面检索的时候判断
             $macArray = explode(',', $mac);         //将字符串以“,”分隔成数组

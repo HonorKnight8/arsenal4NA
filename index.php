@@ -82,7 +82,7 @@
     // if (isset($_POST["submit"])) {
     if (count($_POST) !== 0) {
         //保存当前页面位置，用于登录后跳转回当前页面
-        $_SESSION['currentPage'] = $_REQUEST["action"];
+        $_SESSION['currentPage'] = $_REQUEST["Page"];
         // echo count($_POST) . '<br />';
         // echo '<pre>';
         // print_r($_POST);

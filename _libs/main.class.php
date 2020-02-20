@@ -7,7 +7,7 @@ class Main
     function __construct($action = "")
     {
         $this->action = $action;
-        $this->menu = isset($_REQUEST["action"]) ? $_REQUEST["action"] : "0";
+        $this->menu = isset($_REQUEST["Page"]) ? $_REQUEST["Page"] : "0";
         $_SESSION['currentPage'] = $this->menu; //保存当前页面位置，用于登录后跳转回当前页面
         //echo $this->action;
         //echo $this->shape;
@@ -53,6 +53,9 @@ class Main
                 break;
             case "PreferencesHR":
                 $div .= new PreferencesHR();
+                break;
+            case "ModifyStaffInfo":
+                $div .= new ModifyStaffInfo();
                 break;
             default:
                 $div .= $this->HomePage();

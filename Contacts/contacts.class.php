@@ -53,7 +53,7 @@ class Contacts
             $staffInfoArray = self::getStaffInfo($_SESSION['staffID'], 1);
             $this->divContacts .= self::StaffInfoDiv($staffInfoArray);
         } else {
-            //否则，就是查询动作，从结果池中读取（process已经调用函数将结果写入结果池）
+            //否则，就是查询动作，从结果池中读取（process已经调用StaffInfoPool()函数将结果写入结果池）
             $this->divContacts .=  self::$staffInfoPool;
         }
     }
@@ -87,10 +87,38 @@ class Contacts
             }
         } else if (strlen($postArray['inquireStaffName']) !== 0) {
             //可能存在多个结果
-            self::$staffInfoPool = '测试信息：根据姓名进行查询';
-        } else {
+
+            //查询数据库，返回该员工名关联的StaffID
+            include '_libs/connect_DB.php';
+            $stmt = $pdo->prepare("select staffID from staffs where staffName = :staffName ");
+            $stmt->execute(array(":staffName" => $postArray['inquireStaffName']));
+            $resultArray = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            // echo '<pre>';
+            // print_r($resultArray);
+            // echo  '</pre>';
+
+            //遍历结果数组，获得单独的工号，通过工号进行查询(与上面相同)
+            self::$staffInfoPool = '';
+            foreach ($resultArray as  $key => $value) {
+                // echo $value["staffID"];
+                $staffInfoArray = self::getStaffInfo($value["staffID"], 1);
+                if (!is_array($staffInfoArray)) {
+                    //结果不是数组，那就是错误信息，直接把错误信息添加给结果池
+                    self::$staffInfoPool .= $staffInfoArray;
+                } else {
+                    self::$staffInfoPool .= self::StaffInfoDiv($staffInfoArray);
+                }
+            }
+
+            // self::$staffInfoPool .= '测试信息：根据姓名进行查询';
+        } else if (strlen($postArray['inquireDepartment']) !== 0) {
             //可能存在多个结果
+
+
             self::$staffInfoPool = '测试信息：根据部门进行查询';
+        } else {
+            //三个查询框都没输入
+            self::$staffInfoPool = '错误信息：未输入任何查询目标';
         }
     }
 
@@ -174,12 +202,19 @@ class Contacts
         $StaffInfoDiv .= '&emsp;&emsp;钉钉：' . $staffInfoArray['dingtalk'] . '<br />';
         $StaffInfoDiv .= '自我介绍：' . $staffInfoArray['selfIntroduction'] . '<br />';
         $StaffInfoDiv .= '</fieldset></form>';
-        if ($_SESSION['permission'] == 99 || $_SESSION['permission'] == 15) {
-            //默认自己应该
-            // $staffInfoArray['staffID']
-            $StaffInfoDiv .= '<a class="a_in_content" href="index.php?action=PreferencesPersonal" class="link" >查看详情/修改个人信息</a>';
+        if ($_SESSION['staffID'] == $staffInfoArray['staffID']) {
+            // 员工自己，显示个人后台
+            $StaffInfoDiv .= '<a class="a_in_content" href="index.php?Page=PreferencesPersonal" class="link" >查看详情/修改个人信息</a>';
+        } else if ($_SESSION['permission'] == 99 || $_SESSION['permission'] == 15) {
+            // 超管、HR，显示修改员工信息页面
+
+            $StaffInfoDiv .= '<a class="a_in_content" href="index.php?Page=ModifyStaffInfo&StaffID=' . $staffInfoArray['staffID'] . '" class="link" >查看详情/修改员工信息</a>';
         }
-        //当有权限修改该员工信息时，才显示
+
+
+
+
+        //应该
         $StaffInfoDiv .= '</div>';
 
 
