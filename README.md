@@ -54,7 +54,7 @@ Git、GitHub<br />
 （希望能在一定程度上为本行业添砖加瓦）
 
 ## 鸣谢:
-PHP.net、w3school、慕课网、腾讯课堂、《细说PHP》...<br />
+PHP.net、《细说PHP》、w3school、runoob.com、慕课网...<br />
 GitHub、VScode、Notepad++、Xdebug...<br />
 朋友谭工...<br />
 

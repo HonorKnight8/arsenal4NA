@@ -1,0 +1,24 @@
+{
+    "name": "arsenal4na/a4na",
+    "description": "arsenal for Network Administrator",
+    "type": "project",
+    "license": "GPLv3",
+    "authors": [
+        {
+            "name": "honorknight8",
+            "email": "Honor_Knight8@outlook.com"
+        }
+    ],
+    "require": {
+        "filp/whoops": "^2.7",
+        "symfony/var-dumper": "^5.0",
+        "catfan/medoo": "^1.7",
+        "twbs/bootstrap": "^4.4"
+    },
+    "repositories": {
+        "packagist": {
+            "type": "composer",
+            "url": "https://mirrors.aliyun.com/composer/"
+        }
+    }
+}

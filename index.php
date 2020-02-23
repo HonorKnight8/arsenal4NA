@@ -1,106 +1,64 @@
-<!DOCTYPE html>
-<html lang="en">
+<?php
+header('content-type:text/html;charset=utf-8');
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>arsenal4NA</title>
+// 入口文件
+// 1.定义常量
+// 2.加载函数库
+// 3.启动框架
 
-    <link rel="stylesheet" type="text/css" href="_css/main.css" />
-    <link rel="stylesheet" type="text/css" href="_css/others.css" />
-    <script src="_js/js.js"></script>
-</head>
+// 用绝对路径，会不会造成windows、Linux不同系统下的问题？？？
+define('ROOT', realpath('./'));
+define('APP', realpath('./app'));
+define('MODULE', '\app');            //方便使用命名空间调用类
+define('DEBUG', true);  // Debug开关
+// echo ROOT . "<br \>" . APP . "<br \>" . MODULE . "<br \>" . DEBUG;
 
-<!-- <body onload='openNav()'> -->
+include ROOT . '/only4debuging/p.php';  // 只为方便开发、调试使用的函数 p()
+include "vendor/autoload.php";  //composer第三方库的自动加载
 
-<body>
-    <?php
-    header('content-type:text/html;charset=utf-8');
-    // include "_libs/connect_DB.php";
-    // 优先从path1中找类文件，然后从path2中找
-    spl_autoload_register(
-        function ($className) {
-            $path1 = "_libs/" . strtolower($className) . ".class.php";
-            $path2 = "_preferences/" . strtolower($className) . ".class.php";
-            $path3 = "_process/" . strtolower($className) . ".class.php";
-            $path4 = "Contacts/" . strtolower($className) . ".class.php";
-            $path5 = "ITAM/" . strtolower($className) . ".class.php";
-            $path6 = "MACInquire/" . strtolower($className) . ".class.php";
-            $path7 = "WinFWAnalyzer/" . strtolower($className) . ".class.php";
-            $path8 = "SubnetCalc/" . strtolower($className) . ".class.php";
-            $path9 = "Scripts/" . strtolower($className) . ".class.php";
-            $path10 = "Exam/" . strtolower($className) . ".class.php";
-            if (file_exists($path1)) {
-                include $path1;
-            } else if (file_exists($path2)) {
-                include $path2;
-            } else if (file_exists($path3)) {
-                include $path3;
-            } else if (file_exists($path4)) {
-                include $path4;
-            } else if (file_exists($path5)) {
-                include $path5;
-            } else if (file_exists($path6)) {
-                include $path6;
-            } else if (file_exists($path7)) {
-                include $path7;
-            } else if (file_exists($path8)) {
-                include $path8;
-            } else if (file_exists($path9)) {
-                include $path9;
-            } else if (file_exists($path10)) {
-                include $path10;
-            }
-            // else {
-            //     include "nosuchfile.php";
-            // }
-        }
-    );
-    // spl_autoload_register(function ($className) {
-    //     include "_libs/" . strtolower($className) . ".class.php";
-    // });
+if (DEBUG) {
+    // 若开启Debug，则加载filp/whoops库，用于错误提示
+    $whoops = new \Whoops\Run;
+    $whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler);
+    $whoops->register();
 
-    // include '_libs/topbar.class.php';
-    // include '_libs/sidebar.class.php';
-    // include '_libs/main.class.php';
-    // include '../_libs/loginstatus.class.php';
+    ini_set('display_error', 'On');
+} else {
+    ini_set('display_error', 'Off');
+}
 
-    if (isset($_GET["sid"])) {
-        session_id($_GET["sid"]);
-    }
+// 测试filp/whoops
+// ssssssssssq();
+// exit();
 
-    //判断登录状态
-    // $loginStatus = new LoginStatus;
-    // $loginStatus->getLoginStatus();
+// 测试symfony/var-dumper
+// p($_SERVER);
+// exit();
 
-    // echo LoginStatus::getLoginStatus();
-    new LoginStatus();
-    // echo $getLoginStatus->getLoginStatus();
-    // $loginStatus = $getLoginStatus->getLoginStatus();
-    // var_dump($loginStatus);
 
-    // if (isset($_POST["submit"])) {
-    if (count($_POST) !== 0) {
-        //保存当前页面位置，用于登录后跳转回当前页面
-        $_SESSION['currentPage'] = $_REQUEST["Page"];
-        // echo count($_POST) . '<br />';
-        // echo '<pre>';
-        // print_r($_POST);
-        // echo '</pre>';
-        // echo '触发post-submit';
-        echo new Process();
-    } else {
-        echo new TopBar();
-        //顶栏
+include ROOT . '/lib/entry.class.php';
+spl_autoload_register('\lib\Entry::load');
+\lib\Entry::run();
+// 启动入口
 
-        echo new SideBar();
-        //侧栏
-
-        echo new Main();
-        //主页面
-    }
-
-    ?>
-</body>
-
-</html>
+// // 自动加载指定目录的类
+// // 改为使用Entry::load + namespace自动加载类：spl_autoload_register('\lib\Entry::load');
+// spl_autoload_register(
+//     function ($className) {
+//         $path1 = ROOT . "/lib/" . strtolower($className) . ".class.php";
+//         // echo $path1;
+//         // exit();
+//         if (file_exists($path1)) {
+//             include $path1;
+//         }
+//         // else if (file_exists($path2)) {
+//         //     include $path2;
+//         // } 
+//         // else {
+//         //     include "nosuchfile.php";
+//         // }
+//     }
+// );
+// //测试自动加载指定目录的类
+// // Groceries::p(array(1, 2, 3, 4, 5));
+// // exit();
