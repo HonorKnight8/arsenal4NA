@@ -1,4 +1,7 @@
 <?php
+
+use Whoops\Handler\XmlResponseHandler;
+
 header('content-type:text/html;charset=utf-8');
 
 // 入口文件

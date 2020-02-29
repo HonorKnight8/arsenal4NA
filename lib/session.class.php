@@ -6,6 +6,41 @@ namespace lib;
 //考虑新加字段：StaffID、默认超时时间、用户自定义超时时间（勾选“保存登录状态”）、客户端信息？
 class Session
 {
+	public static function loginStatus()
+	{
+		require_once 'lib/connect_DB.php';
+		Session::start($pdo);
+		$PHPSESSID = session_id();
+		// echo $PHPSESSID . "<br />"; // 调试
+
+		$stmt = $pdo->prepare("select PHPSESSID, update_time, client_ip, data from session where PHPSESSID=:PHPSESSID");
+		$stmt->execute(array(":PHPSESSID" => $PHPSESSID));
+		$row = $stmt->fetch(\PDO::FETCH_ASSOC);
+		// $sessionData = explode(',', $row['data']);
+		// var_dump(empty($row['data']));
+
+		if (!empty($row['data']) && $_SESSION['loginStatus'] == 1) {
+			//data不为空 且 loginStatus等于1，说明已登录
+			//根据phphsessid获取用户名
+			$stmt = $pdo->prepare("select staffID, staffName from staffs where staffID=:staffID");
+			$stmt->execute(array(":staffID" => $_SESSION["staffID"]));
+			$row = $stmt->fetch(\PDO::FETCH_ASSOC);
+			$_SESSION["staffName"] = $row["staffName"];
+		} else {
+			// 未登录
+			$_SESSION['loginStatus'] = 0;   //后续可以直接根据这个值来判断是否登录
+			$_SESSION['permission'] = -1;   //后面边栏的条件判断要用到，避免报“Notice”
+		}
+
+		// echo "<pre>";                    //调试
+		// print_r($row['data']);
+		// print_r($row);                    //调试
+		// print_r($_SESSION);                //调试
+		// echo "</pre>";                    //调试
+		// echo session_id() . "<br/ >";    //调试
+	}
+
+	////////////////////////////////////////////////////////////////////////////////
 	private static $handler = null;
 	private static $ip = null;
 	private static $lifetime = null;
@@ -19,7 +54,7 @@ class Session
 		self::$time = time();
 	}
 
-	static function start(PDO $pdo)
+	static function start(\PDO $pdo)
 	{
 		self::init($pdo);
 		session_set_save_handler(
@@ -56,7 +91,7 @@ class Session
 
 		$stmt->execute(array($PHPSESSID));
 
-		if (!$result = $stmt->fetch(PDO::FETCH_ASSOC)) {
+		if (!$result = $stmt->fetch(\PDO::FETCH_ASSOC)) {
 			return '';
 		}
 
@@ -84,7 +119,7 @@ class Session
 		$stmt = self::$handler->prepare($sql);
 
 		$stmt->execute(array($PHPSESSID));
-		$result = $stmt->fetch(PDO::FETCH_ASSOC);
+		$result = $stmt->fetch(\PDO::FETCH_ASSOC);
 		@$resultRows = count($result);
 		// echo $resultRows; //调试
 		if ($resultRows == 4) {

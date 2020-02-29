@@ -11,6 +11,8 @@ class ZaxMACIcontroller
         // echo 'ZaxMACI';
 
         include ROOT . "/app/zaxmaci/view/zaxmaciview.php";
+        include ROOT . "/app/zaxmaci/model/zaxmacimodel.php";
+
         if (isset($_POST['macinquire'])) {
             \app\zaxmaci\view\ZaxMACIview::$div_inquireResult = self::doInquire($_POST['macinquire']);
         }
@@ -27,11 +29,11 @@ class ZaxMACIcontroller
         // var_dump(isset($_POST['inputmac']));
         // ???不能用isset($_POST['inputmac'])判断输入框是否有输入，即使是空的也会返回ture
 
-        //用了session存验证码
-        // if (strlen($_POST['inputcaptchaget']) == 0 || strtolower($_POST['inputcaptchaget']) !== strtolower($_SESSION['captchaCreated'])) {
-        //     return '<span class="processResultMessage" >验证码错误</span><br />';
-        //     // <span class="processResultMessage" >  </span>
-        // } else
+        // 用了session存验证码
+        if (strlen($_POST['inputcaptchaget']) == 0 || strtolower($_POST['inputcaptchaget']) !== strtolower($_SESSION['captchaCreated'])) {
+            return '<span class="processResultMessage" >验证码错误</span><br />';
+            // <span class="processResultMessage" >  </span>
+        } else
         if (strlen($_POST['inputmac']) == 0) {
             //判断输入的MAC地址是否为空
             return '<span class="processResultMessage" >未输入任何MAC地址</span><br />';
@@ -56,7 +58,6 @@ class ZaxMACIcontroller
                     if (strlen($singleMac) !== 0) { // 判断singleMac长度
                         //调用函数进行查询
                         // echo $singleMac . '<br />';
-                        include ROOT . "/app/zaxmaci/model/zaxmacimodel.php";
                         $resule .= \app\zaxmaci\model\ZaxMACImodel::inquireOneMac($singleMac);
                     }
                 }

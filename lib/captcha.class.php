@@ -8,6 +8,21 @@ namespace lib;
 
 class Captcha
 {
+    public static function captchaget0()
+    {
+        $config = array('type' => 0, 'difficultyDegree' => 0, 'fontFile' => "lib/SourceHanSerifCN-Medium.otf");
+        $captcha = new Captcha;
+        $captcha->init($config);
+    }
+
+    public static function captchaget1()
+    {
+        $config = array('type' => 0, 'difficultyDegree' => 1, 'fontFile' => "lib/SourceHanSerifCN-Medium.otf");
+        $captcha = new Captcha;
+        $captcha->init($config);
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////
     //传入参数
     private $type;
     private $difficultyDegree;
@@ -30,7 +45,7 @@ class Captcha
 
     //接收处理输入参数
     // $config=array('type'=>0,'difficultyDegree'=>0,'fontFile'=>$fontfile);
-    function __construct($config = array())
+    function init($config = array())
     {
         // print_r($config);
         $this->type = $config['type'];
@@ -200,8 +215,8 @@ class Captcha
         return imagecolorallocate($this->image, mt_rand(0, 222), mt_rand(0, 222), mt_rand(0, 222));
     }
 
-    function __destruct()
-    {
-        imagedestroy($this->image);
-    }
+    // function __destruct()
+    // {
+    //     imagedestroy($this->image);
+    // }
 }

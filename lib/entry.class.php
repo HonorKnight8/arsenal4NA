@@ -9,6 +9,27 @@ class Entry
 
     static public function run()
     {
+        // // 测试数据库连接，>>>>>>>>>>>>>保留这段<<<<<<<<<<<<<<<<
+        // require_once 'lib/connect_DB.php';
+        // // 测试1，列举并输出表名
+        // $stmt = $pdo->prepare("show tables");
+        // $stmt->execute();
+        // while ($row = $stmt->fetch(\PDO::FETCH_ASSOC)) {
+        //     print_r($row);
+        //     echo '<br>';
+        // }
+        // // 测试2，读取session表
+        // $stmt = $pdo->prepare("select * from session");
+        // $stmt->execute();
+        // $row = $stmt->fetch(\PDO::FETCH_ASSOC);
+        // print_r($row);
+        // // 测试结束（OK）
+        // exit();
+
+        //初始化session
+        \lib\Session::loginStatus();
+        // exit();
+
         //调用路由，获取对应控制器、方法
         \lib\Route::route();
         $actionArray = \lib\Route::$actionArray;
@@ -27,11 +48,16 @@ class Entry
             // 类名含有zax、block，说明是小工具、子系统，路径不一样
             $ctrlfile = APP . '\\' . strtolower($className) . '/controller/' . strtolower($className) . 'controller.php';
             $ctrlClass = MODULE . '\\' . strtolower($className) . '\\controller\\' . $className . 'Controller';
+        } else if (strpos($className, 'Captcha') !== false) {
+            // 类名含有Captcha，验证码类
+            $ctrlfile = ROOT . '\lib\\' . $actionArray[2] . strtolower($className) . '.class.php';
+            $ctrlClass =  '\lib\\' . $className;
         } else if (strlen($actionArray[2]) > 1) {
             // 在配置文件中指明了类文件目录
             $ctrlfile = ROOT . $actionArray[2] . strtolower($className) . 'controller.php';
             $ctrlClass =  $actionArray[2] . $className . 'Controller';
         } else {
+            //其他情况，就是APP目录下的controller
             $ctrlfile = APP . '/controller/' . strtolower($className) . 'controller.php';
             $ctrlClass = MODULE . '\\controller\\' . $className . 'Controller';
             // 这句是“类的命名空间路径”：'\app\ctrl\indexController'
