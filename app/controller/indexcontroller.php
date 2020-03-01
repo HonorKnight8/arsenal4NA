@@ -4,17 +4,22 @@ namespace app\controller;
 
 // use core\lib\model;
 
-class indexController extends \lib\Entry
+class indexController
 // 继承入口类
 {
     public function index()
     {
+        echo 'index';
+
+        // 初始化http头
+        // 初始化侧栏
+        // 初始化顶栏
+
         //示例8：Twig
-        dump($_SERVER);
+        // dump($_SERVER);
         // $data = 'Hello World 20200222_b';
         // $this->assign('data', $data);
         // $this->display('index.html');
-        echo 'index';
 
         // 示例7：Medoo+model类
         // $model = new \app\model\user1Model();

@@ -2,7 +2,7 @@
 
 namespace app\zaxmaci\controller;
 
-class ZaxMACIcontroller
+class ZaxMACIController
 {
     private $div_macinquire;
     static $div_inquireResult;
@@ -10,13 +10,10 @@ class ZaxMACIcontroller
     {
         // echo 'ZaxMACI';
 
-        include ROOT . "/app/zaxmaci/view/zaxmaciview.php";
-        include ROOT . "/app/zaxmaci/model/zaxmacimodel.php";
-
         if (isset($_POST['macinquire'])) {
-            \app\zaxmaci\view\ZaxMACIview::$div_inquireResult = self::doInquire($_POST['macinquire']);
+            \app\zaxmaci\view\ZaxMACIView::$div_inquireResult = self::doInquire($_POST['macinquire']);
         }
-        echo new \app\zaxmaci\view\ZaxMACIview;
+        echo new \app\zaxmaci\view\ZaxMACIView;
     }
 
     static function doInquire($MAC)
@@ -58,7 +55,7 @@ class ZaxMACIcontroller
                     if (strlen($singleMac) !== 0) { // 判断singleMac长度
                         //调用函数进行查询
                         // echo $singleMac . '<br />';
-                        $resule .= \app\zaxmaci\model\ZaxMACImodel::inquireOneMac($singleMac);
+                        $resule .= \app\zaxmaci\model\ZaxMACIModel::inquireOneMac($singleMac);
                     }
                 }
                 $t2 = microtime(true);

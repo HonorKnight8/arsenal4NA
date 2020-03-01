@@ -39,8 +39,9 @@ if (DEBUG) {
 // exit();
 
 
-include ROOT . '/lib/entry.class.php';
-spl_autoload_register('\lib\Entry::load');
+include ROOT . '/lib/entry.php';
+spl_autoload_register('\lib\Entry::load');  // 自动加载类文件
+
 \lib\Entry::run();
 // 启动入口
 

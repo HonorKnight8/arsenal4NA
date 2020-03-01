@@ -2,22 +2,24 @@
 
 namespace app\zaxmaci\view;
 
-class ZaxMACIview
+class ZaxMACIView extends \app\view\indexView
 {
     static public $div_inquireResult;
-    function __construct($action = "")
+    // 继承
+    // function __construct()
+    // {
+    // }
+
+    function __toString()
     {
         $this->div_macinquire = '<div class="div_macinquire" id="div_macinquire">';
 
         $this->div_macinquire .= $this->thisPage();
+        $this->div_macinquire .= self::$div_inquireResult;
 
-        $this->div_macinquire .= SELF::$div_inquireResult;
-    }
-
-    function __toString()
-    {
         $this->div_macinquire .= '</div>';
-        return $this->div_macinquire;
+        $this->div_macinquire .= '</div></body></html>';
+        return  $this->altogether . $this->div_macinquire;
     }
 
     private function thisPage()
@@ -40,7 +42,7 @@ class ZaxMACIview
         $page .= '输入MAC地址：(进行批量查询，请用<span style="background-color:gray;font-weight:900;color:rgb(200, 0, 0);" >逗号“,”分隔</span>)<br />';
         $page .= '&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<textarea name="inputmac" rows="10" cols="33" placeholder="请输入有效的MAC地址……" required></textarea><br />';
         $page .= '输入验证码：<input type="text" name="inputcaptchaget" id="" placeholder="请输入下方的验证码……" required autocomplete="off" /><br />';
-        $page .= '&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<img src="http://www.a4na.fake/captcha/captchaget0/" alt="" id="verifyimage" /><a class="a_in_content" onclick="document.getElementById(\'verifyimage\').src=\'http://www.a4na.fake/captcha/captchaget0/?r=\'+Math.random()" href="javascript:void(0)">显示/更换验证码</a><br />';
+        $page .= '&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<img src="/captcha/captchaget0/" alt="" id="verifyimage" /><a class="a_in_content" onclick="document.getElementById(\'verifyimage\').src=\'/captcha/captchaget0/?r=\'+Math.random()" href="javascript:void(0)">显示/更换验证码</a><br />';
 
         $page .= '&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<input class="submit" type="submit" name="macinquire" value="查询">';
         $page .= '</fieldset></form>';

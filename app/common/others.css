@@ -33,6 +33,25 @@ body {
     display: block;
     transition: 0.3s; /*标签延迟0.3s显示*/
 }
+
+.dropdown-content {
+    padding: 0px 0px 0px 5px;
+    display: none;
+    position: absolute;
+    /* 加这句就悬浮，删这句就插入 */
+    background-color: #000000b6;
+    /* box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2); */
+}
+
+.dropdown-content a:hover {
+    background-color: #000000d5;
+
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
 /*侧栏一级菜单和关闭按钮*/
 .menu, .closebtn{
     /* padding: 8px 8px 8px 32px; */
@@ -113,6 +132,7 @@ body {
     /* padding: 16px; */
 }
  
+
 
 
 

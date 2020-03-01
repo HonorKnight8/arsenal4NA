@@ -2,7 +2,7 @@
 
 namespace app\zaxmaci\model;
 
-class ZaxMACImodel
+class ZaxMACIModel
 {
 
     /**

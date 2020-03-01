@@ -50,7 +50,7 @@ class Entry
             $ctrlClass = MODULE . '\\' . strtolower($className) . '\\controller\\' . $className . 'Controller';
         } else if (strpos($className, 'Captcha') !== false) {
             // 类名含有Captcha，验证码类
-            $ctrlfile = ROOT . '\lib\\' . $actionArray[2] . strtolower($className) . '.class.php';
+            $ctrlfile = ROOT . '\lib\\' . strtolower($className) . '.php';
             $ctrlClass =  '\lib\\' . $className;
         } else if (strlen($actionArray[2]) > 1) {
             // 在配置文件中指明了类文件目录
@@ -92,13 +92,14 @@ class Entry
 
         // echo $class;
         // exit();
-
+        // 实测只要命名空间与文件目录相符，就能够自动加载
         if (isset(self::$classMap[$class])) {
             return true;
         } else {
             $classPath = str_replace('\\', '/', $class);
             // 将类的命名空间，转换为路径
-            $files = ROOT . '/' . $classPath . '.class.php';
+            // $files = ROOT . '/' . $classPath . '.class.php';
+            $files = ROOT . '/' . $classPath . '.php';
             if (is_file($files)) {
                 include $files;
                 self::$classMap[$class] = $class;
