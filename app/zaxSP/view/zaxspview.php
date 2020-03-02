@@ -26,7 +26,8 @@ class ZaxSPView extends \app\view\IndexView
     {
         $page = '';
         $page .= '<fieldset><legend>SP: 常用脚本下载</legend>';
-        $page .= '本功能开发进度：0%';
+        $page .= '本功能开发进度：50%';
+        $page .= \app\zaxsp\model\ZaxSPModel::$hyperLinks;
         $page .= '</fieldset>';
 
         return $page;

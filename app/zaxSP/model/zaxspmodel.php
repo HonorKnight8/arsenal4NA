@@ -1,39 +1,37 @@
 <?php
-class Scripts
-{
-    // function __construct()
-    // {
-    // }
 
-    function __toString()
+namespace app\zaxsp\model;
+
+class ZaxSPModel
+{
+    public static $hyperLinks;
+    public static function getHyperLinks()
     {
         $hyperLinks = '';
-        $arr = scandir("Scripts/Windows/");
+        $arr = scandir("app/zaxsp/scripts_win/");
         foreach ($arr as $value) {  //脚本文件
             if (!($value == '.' || $value == '..')) {
                 $encode = mb_detect_encoding($value, array("ASCII", 'UTF-8', "GB2312", "GBK", 'BIG5', 'LATIN1'));
                 if ($encode != 'UTF-8') {
                     $value = mb_convert_encoding($value, 'UTF-8', $encode);
                 }
-                $hyperLinks .= '<a href="Scripts/Windows/' . $value . '" title="' . $value . '">' . $value . '</a><br />';
+                $hyperLinks .= '<a href="/app/zaxsp/scripts_win/' . $value . '" title="' . $value . '">' . $value . '</a><br />';
             }
         }
         $hyperLinks .= '<br />';
-        $arr = scandir("Scripts/Linux/");
+        $arr = scandir("app/zaxsp/scripts_linux/");
         foreach ($arr as $value) {  //脚本文件
             if (!($value == '.' || $value == '..')) {
                 $encode = mb_detect_encoding($value, array("ASCII", 'UTF-8', "GB2312", "GBK", 'BIG5', 'LATIN1'));
                 if ($encode != 'UTF-8') {
                     $value = mb_convert_encoding($value, 'UTF-8', $encode);
                 }
-                $hyperLinks .= '<a href="Scripts/Linux/' . $value . '" title="' . $value . '">' . $value . '</a><br />';
+                $hyperLinks .= '<a href="/app/zaxsp/scripts_linux/' . $value . '" title="' . $value . '">' . $value . '</a><br />';
             }
         }
-        $div = '<div>';
-        $div .= '<span>本页面收录一些常用的脚本</span><p>';
-        $div .= $hyperLinks;
-        $div .= '</div>';
-
-        return $div;
+        self::$hyperLinks = '';
+        self::$hyperLinks .= '<div>';
+        self::$hyperLinks .= $hyperLinks;
+        self::$hyperLinks .= '</div>';
     }
 }
