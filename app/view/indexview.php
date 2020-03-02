@@ -2,7 +2,7 @@
 
 namespace app\view;
 
-class indexView
+class IndexView
 {
     public static $welcome;
     public static $title;
@@ -68,7 +68,7 @@ class indexView
         $sidebar .= '<a href="#" class="menu">ZAX工具集</a>';
         $sidebar .= '<div class="dropdown-content">';
         $sidebar .= '<a class="sub_menu" href="/zax/sp/" title="Scripts: 常用脚本下载">SP:&nbsp;常用脚本</a>';
-        $sidebar .= '<a class="sub_menu" href="/zax/maci/" title="MACInquire: MAC地址归属厂商查询">MACI:&nbsp;MA查询</a>';
+        $sidebar .= '<a class="sub_menu" href="/zax/maci/" title="MACInquire: MAC地址归属厂商查询">MACI:&nbsp;MAC查询</a>';
         $sidebar .= '<a class="sub_menu" href="/zax/ipi/" title="IPInquire: IP地址地理位置查询">IPI:&nbsp;IP查询</a>';
         $sidebar .= '<a class="sub_menu" href="/zax/snc/" title="SubnetCalc: 子网计算器">SNC:&nbsp;子网计算</a>';
         $sidebar .= '<a class="sub_menu" href="/zax/edc/" title="Encode&Decode: 多种编码、解码工具">EDC:&nbsp;编解码</a>';

@@ -2,11 +2,10 @@
 
 namespace app\blockexam\controller;
 
-class BlockExamController extends \lib\Entry
-// 继承入口类
+class BlockExamController
 {
     public function blockexam()
     {
-        echo 'BlockExam';
+        echo new \app\blockexam\view\BlockExamView;
     }
 }

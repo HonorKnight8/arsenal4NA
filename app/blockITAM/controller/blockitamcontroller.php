@@ -2,11 +2,10 @@
 
 namespace app\blockitam\controller;
 
-class BlockITAMController extends \lib\Entry
-// 继承入口类
+class BlockITAMController
 {
     public function blockitam()
     {
-        echo 'BlockITAM';
+        echo new \app\blockitam\view\BlockITAMView;
     }
 }

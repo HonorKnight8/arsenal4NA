@@ -60,7 +60,7 @@ class Entry
             //其他情况，就是APP目录下的controller
             $ctrlfile = APP . '/controller/' . strtolower($className) . 'controller.php';
             $ctrlClass = MODULE . '\\controller\\' . $className . 'Controller';
-            // 这句是“类的命名空间路径”：'\app\ctrl\indexController'
+            // 这句是“类的命名空间路径”：'\app\ctrl\IndexController'
         }
         // echo $className;
         // echo $ctrlfile;

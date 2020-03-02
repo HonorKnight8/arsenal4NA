@@ -2,30 +2,32 @@
 
 namespace app\zaxmaci\view;
 
-class ZaxMACIView extends \app\view\indexView
+class ZaxMACIView extends \app\view\IndexView
 {
-    static public $div_inquireResult;
-    // 继承
+    public static $div_inquireResult;
+    // 继承自基类\app\view\IndexView
     // function __construct()
     // {
     // }
 
     function __toString()
     {
-        $this->div_macinquire = '<div class="div_macinquire" id="div_macinquire">';
+        $div = '';
+        $div .= '<div class="div_macinquire" id="div_macinquire">';
 
-        $this->div_macinquire .= $this->thisPage();
-        $this->div_macinquire .= self::$div_inquireResult;
+        $div .= $this->thisPage();
+        $div .= self::$div_inquireResult;
 
-        $this->div_macinquire .= '</div>';
-        $this->div_macinquire .= '</div></body></html>';
-        return  $this->altogether . $this->div_macinquire;
+        $div .= '</div>';
+        $div .= '</div></body></html>';
+        return  $this->altogether . $div;
     }
 
     private function thisPage()
     {
-        $page = '<form action="" method="post" >';
-        $page .= '<fieldset><legend>查询MAC地址所归属的厂商</legend>';
+        $page = '';
+        $page .= '<form action="" method="post" >';
+        $page .= '<fieldset><legend>查询MAC地址所归属的厂商(v1.0)</legend>';
         $page .= '<h4>资料更新时间：2020-02-19</h4>';
         $page .= '请在下面的框中输入要查询的MAC地址，支持的输入格式有：<br />';
         $page .= '&emsp;&emsp;1、使用“-”进行分隔的格式：00-1A-11-A1-B2-C3<br />';

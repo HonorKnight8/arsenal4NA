@@ -2,11 +2,10 @@
 
 namespace app\blockpubb\controller;
 
-class BlockPUBBController extends \lib\Entry
-// 继承入口类
+class BlockPUBBController
 {
     public function blockpubb()
     {
-        echo 'BlockPUBB';
+        echo new \app\blockpubb\view\BlockPUBBView;
     }
 }

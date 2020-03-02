@@ -2,11 +2,10 @@
 
 namespace app\zaxsp\controller;
 
-class ZaxSPController extends \lib\Entry
-// 继承入口类
+class ZaxSPController
 {
     public function zaxsp()
     {
-        echo 'ZaxSP';
+        echo new \app\zaxsp\view\ZaxSPView;
     }
 }

@@ -2,8 +2,7 @@
 
 namespace app\backend\controller;
 
-class BackendController extends \lib\Entry
-// 继承入口类
+class BackendController
 {
     public function backend()
     {

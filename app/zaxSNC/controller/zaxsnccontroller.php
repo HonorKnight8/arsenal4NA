@@ -2,11 +2,10 @@
 
 namespace app\zaxsnc\controller;
 
-class ZaxSNCController extends \lib\Entry
-// 继承入口类
+class ZaxSNCController
 {
     public function zaxsnc()
     {
-        echo 'ZaxSNC';
+        echo new \app\zaxsnc\view\ZaxSNCView;
     }
 }

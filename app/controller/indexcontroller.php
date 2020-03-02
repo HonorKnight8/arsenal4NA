@@ -4,17 +4,15 @@ namespace app\controller;
 
 // use core\lib\model;
 
-class indexController
+class IndexController
 // 继承入口类
 {
     public function index()
     {
-        echo 'index';
+        // $index = new \app\view\IndexView;
+        // echo $index->altogether;
 
-        // 初始化http头
-        // 初始化侧栏
-        // 初始化顶栏
-
+        echo new \app\view\HomePageView;
         //示例8：Twig
         // dump($_SERVER);
         // $data = 'Hello World 20200222_b';

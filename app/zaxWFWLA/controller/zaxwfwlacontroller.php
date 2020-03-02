@@ -2,11 +2,10 @@
 
 namespace app\zaxwfwla\controller;
 
-class ZaxWFWLAController extends \lib\Entry
-// 继承入口类
+class ZaxWFWLAController
 {
     public function zaxwfwla()
     {
-        echo 'ZaxWFWLA';
+        echo new \app\zaxwfwla\view\ZaxWFWLAView;
     }
 }

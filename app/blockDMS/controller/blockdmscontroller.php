@@ -2,11 +2,10 @@
 
 namespace app\blockdms\controller;
 
-class BlockDMSController extends \lib\Entry
-// 继承入口类
+class BlockDMSController
 {
     public function blockdms()
     {
-        echo 'BlockDMS';
+        echo new \app\blockdms\view\BlockDMSView;
     }
 }
