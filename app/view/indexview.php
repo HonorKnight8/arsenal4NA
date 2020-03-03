@@ -6,12 +6,12 @@ class IndexView
 {
     public static $welcome;
     public static $title;
-    public static $message;
+    public static $topBarMessage;
 
     public $altogether; // 页面公共部分：头部、边栏、顶栏，均由index继承
-    function __construct($message = NULL)
+    function __construct($topBarMessage = NULL)
     {
-        // $message 顶栏显示信息
+        // $topBarMessage 顶栏显示信息
 
         // Header
         $this->altogether = self::header();
@@ -20,21 +20,20 @@ class IndexView
         $this->altogether .= self::sidebar();
 
         // topbar
-        $this->altogether .= self::topbar($message);
+        $this->altogether .= self::topbar($topBarMessage);
 
         $this->altogether .= '<div class="main" id="main">';
     }
 
 
-    public static function topbar($message)
+    public static function topbar($topBarMessage)
     {
         // $welcomeUser = '欢迎你，' . $_SESSION['staffName'];
         self::$welcome = ($_SESSION['loginStatus'] == 1) ? '欢迎你，' . $_SESSION['staffName'] : '&nbsp;';
-        self::$message = $message;
+        self::$topBarMessage = $topBarMessage;
 
         // 顶栏显示标题
         self::$title = NULL;
-
 
         // onclick
         // onmouseover    onmouseout 含子元素
@@ -42,11 +41,12 @@ class IndexView
         $topbar = '<div class="topbar" id="topbar">';
         $topbar .= '<span class="openNav" onmouseenter="openNav()" title="打开菜单" top:6px;>&#9776;</span>';
         $topbar .= '<span style="font-size:20px;font-weight:900;" top:6px;>&nbsp;&nbsp;&nbsp;arsenal4NA</span>';
-        if (self::$message == NULL) {
+        if (self::$topBarMessage == NULL) {
             $topbar .= '<span style="font-size:18px">' . self::$title . '</span>';
         } else {
-            $topbar .= '<span class="processResultMessage" >' . self::$message . '</span>';
+            $topbar .= '<span class="processResultMessage" >' . self::$topBarMessage . '</span>';
         }
+        // 因为执行顺序的原因，这里没用了？？
         $topbar .= '<span style="font-size:20px;font-weight:300;position:absolute;top:12px;right:60px;">' . self::$welcome . '</span>';
         $topbar .= '<a class="userinfo" href="index.php?Page=preferences" title="偏好设置">&#9787</a>';
         $topbar .= '<hr style="height:0px;border:none;border-top:4px dashed LawnGreen;" width="100%" />';
@@ -75,7 +75,10 @@ class IndexView
         $sidebar .= '<a class="sub_menu" href="/zax/wfwla/" title="WinFWLogAnalyzer: Windows系统防火墙日志分析">WFWLA:&nbsp;日志分析</a>';
         $sidebar .= '</div>';
         $sidebar .= '</div>';
-        $sidebar .= '<a class="menu" href="/backend/backend/" title="后台管理">后台管理</a>';
+        if ($_SESSION['loginStatus'] == 1) {
+            $sidebar .= '<a class="menu" href="/backend/backend/" title="后台管理">后台管理</a>';
+            $sidebar .= '<a class="menu" href="/logout/logout/" title="后台管理">登出</a>';
+        }
         $sidebar .= '</div>';
 
         return $sidebar;

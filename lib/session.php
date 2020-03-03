@@ -8,7 +8,7 @@ class Session
 {
 	public static function loginStatus()
 	{
-		require_once 'lib/connect_DB.php';
+		require_once ROOT . '/lib/connect_DB.php';
 		Session::start($pdo);
 		$PHPSESSID = session_id();
 		// echo $PHPSESSID . "<br />"; // 调试

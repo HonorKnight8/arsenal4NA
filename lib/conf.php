@@ -30,7 +30,8 @@ class Conf
                     // exit();
                     return $conf[$name];
                 } else {
-                    throw new \Exception('没有这个配置项' . $name);
+                    // throw new \Exception('没有这个配置项' . $name);
+                    return 'noMatchFound';
                 }
             } else {
                 throw new \Exception('找不到配置文件' . $file);
@@ -44,7 +45,7 @@ class Conf
             return self::$conf[$file];
         } else {
             // p(1);   // 测试配置文件是否会重复加载
-            $path = IMOOC . '\core\config\\' . $file . '.php';
+            $path = ROOT . '\config\\' . $file . '.conf.php';
             // p($file);
             // exit();
             if (is_file($path)) {

@@ -23,7 +23,7 @@ php扩展：mysqlnd、pdo、mbstring、gd<br />
 (Document Management System, 文档管理系统)<br />
 5. **功能块：ITAM**......................................0%<br />
 (I.T. Asset Management, IT资产管理：桌面、机房、网络、虚拟资产)<br />
-6. **ZAX工具集**<br />
+6. **ZAX工具集**
   * SP(Scripts, 常用脚本下载)...........................50%<br />
   * MACI(MACInquire, MAC地址归属厂商查询)..............100%<br />
   * IPI(IPInquire, IP地址相关信息查询)...................0%<br />

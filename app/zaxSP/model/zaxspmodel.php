@@ -15,7 +15,7 @@ class ZaxSPModel
                 if ($encode != 'UTF-8') {
                     $value = mb_convert_encoding($value, 'UTF-8', $encode);
                 }
-                $hyperLinks .= '<a href="/app/zaxsp/scripts_win/' . $value . '" title="' . $value . '">' . $value . '</a><br />';
+                $hyperLinks .= '<a class="a_in_content" href="/app/zaxsp/scripts_win/' . $value . '" title="' . $value . '">' . $value . '</a><br />';
             }
         }
         $hyperLinks .= '<br />';
@@ -26,7 +26,7 @@ class ZaxSPModel
                 if ($encode != 'UTF-8') {
                     $value = mb_convert_encoding($value, 'UTF-8', $encode);
                 }
-                $hyperLinks .= '<a href="/app/zaxsp/scripts_linux/' . $value . '" title="' . $value . '">' . $value . '</a><br />';
+                $hyperLinks .= '<a class="a_in_content" href="/app/zaxsp/scripts_linux/' . $value . '" title="' . $value . '">' . $value . '</a><br />';
             }
         }
         self::$hyperLinks = '';

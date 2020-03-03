@@ -16,7 +16,8 @@ return array(
     'zax::wfwla' => array('ZaxWFWLA', 'zaxwfwla', ''),          // ZAX小工具集：WFWLA（WinFWLogAnalyzer）
     // 
     'captcha::captchaget0' => array('Captcha', 'captchaget0', ''),          // 验证码，4位
-    'captcha::captchaget1' => array('Captcha', 'captchaget1', '')          // 验证码，4位
+    'captcha::captchaget1' => array('Captcha', 'captchaget1', ''),          // 验证码，6位
+    'logout::logout' => array('Logout', 'logout', '')                       // 登出
 );
 // 'index::index' => array('类名', '该类中的方法名', '文件目录(如有必要)')
 // /index/index/ 路径不要漏了最后面的“/”

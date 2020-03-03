@@ -5,11 +5,14 @@ namespace lib;
 class Entry
 {
     static public $classMap = array();
-    public $assign;
+    static public $model;
+    // public $assign;
+    public static $ctrlClass;   //这两个用于保存用户当面页面，用于登录后跳转回当前页面
+    public static $actionName;
 
     static public function run()
     {
-        // // 测试数据库连接，>>>>>>>>>>>>>保留这段<<<<<<<<<<<<<<<<
+        // // 测试直接使用PDO进行数据库连接，>>>>>>>>>>>>>保留这段<<<<<<<<<<<<<<<<
         // require_once 'lib/connect_DB.php';
         // // 测试1，列举并输出表名
         // $stmt = $pdo->prepare("show tables");
@@ -26,11 +29,14 @@ class Entry
         // // 测试结束（OK）
         // exit();
 
-        //初始化session
+        // 初始化Medoo数据库连接（目前session类暂时还是使用PDO直连）
+        self::$model = new \lib\model;
+        // dump(\lib\Entry::$model);
+        // 初始化session
         \lib\Session::loginStatus();
         // exit();
 
-        //调用路由，获取对应控制器、方法
+        // 调用路由，获取对应控制器、方法
         \lib\Route::route();
         $actionArray = \lib\Route::$actionArray;
         $getArray = \lib\Route::$getArray;
@@ -39,6 +45,7 @@ class Entry
         // exit();
         $className = $actionArray[0];
         $actionName = $actionArray[1];
+        self::$actionName = $actionName;
         // $classFile = $actionArray[2];
 
         // echo $actionArray[2];
@@ -67,8 +74,10 @@ class Entry
         // echo $ctrlClass;
         // exit();
 
+        self::$ctrlClass = $ctrlClass;
+
         if (is_file($ctrlfile)) {
-            include $ctrlfile;
+            // include $ctrlfile;   //此处无需手动inclube，load方法能加载到
             $ctrl = new $ctrlClass();
             $ctrl->$actionName();
             // \core\lib\log::log('ctrl:' . $ctrlClass . PHP_EOL . 'action' . $action);
