@@ -30,7 +30,7 @@ class HomePageView extends \app\view\IndexView
         $page .= '&emsp;&emsp;这是本攻城狮自己写的一些网络管理、HelpDesk、基础IT运维工作中可能会用到的工具。作为学习编程过程中的一项实践（这个项目的开发进度可能比较缓慢）；同时也作为自己若干年网管、基础IT运维工作的总结；也作为日后工作的提高。<br />';
         $page .= '&emsp;&emsp;如果你在公司从事“网管”、“HelpDesk”、“桌面运维”之类的工作，或者说公司只有你一个ITSupport的情况下，这个工具可能会有所帮助。<br />';
         $page .= '1. <b>核心功能：EEDIR</b>(Employee Directory, 通讯录、系统用户管理)<br />';
-        $page .= '......................................<span style="color:Chocolate;">0%</span><br />';
+        $page .= '......................................<span style="color:Chocolate;">1%</span><br />';
         $page .= '2. <b>功能块：PUBB</b>(Public Utilities Booking & Borrow, 公共设施预定、借用，)<br />';
         $page .= '......................................<span style="color:Chocolate;">0%</span><br />';
         $page .= '3. <b>功能块：Exam</b>(Exam, 在线考试系统：招聘、内训)<br />';

@@ -11,9 +11,10 @@ arsenal4NA(arsenal for Network Administrator)，即：“网管军火库/工具�
 Win10+Apache2.4.41+PHP7.3<br />
 CentOS7+Apache2.4.6+MariaDB5.5+PHP7.2<br />
 php扩展：mysqlnd、pdo、mbstring、gd<br />
+composer：catfan/medoo<br />
 
 ### 功能模块及当前进度
-1. **核心功能：EEDIR**...................................0%<br />
+1. **核心功能：EEDIR**...................................1%<br />
 (Employee Directory, 通讯录、系统用户管理)<br />
 2. **功能块：PUBB**......................................0%<br />
 (Public Utilities Booking & Borrow, 公共设施预定、借用，)<br />
